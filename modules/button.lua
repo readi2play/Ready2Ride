@@ -121,10 +121,10 @@ local function CreateButton()
     local continentID = R2R:GetContinent(zoneID)
     local zoneReport = format("%s (%d) in %s (%d)", C_Map.GetMapInfo(zoneID).name, zoneID, continentID.name, continentID.mapID)
     local text = text or UIParent:CreateFontString(nil, "OVERLAY", "GameFontHighlightLarge")
-    text:SetPoint("CENTER")
+    text:SetPoint("TOP", 0, -125)
     text:SetText( READI.Helper.color:Get("system", R2R.Colors, zoneReport) )
     
-    UIFrameFadeOut(text, 2, 1, 0)
+    C_Timer.After(2, function() UIFrameFadeOut(text, 0.25, 1, 0) end)
   end)
   
 
