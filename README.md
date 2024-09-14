@@ -5,7 +5,7 @@ A Rework of my "DragonridingZoneDrakeButton" WeakAura as an addon with more Opti
 
 Months ago I implemented a kinda mighty WeakAura called **DragonridingZoneDrakeButton**, the naming followed the Blizzard Naming Conventions which lets it look a bit bulky.
 
-I decided to give this project a rework becauseWeakAuras recommends not using the `SecureActionButtonTemplate` because it's obviously quite the oppsosite of what WeakAuras should do (e.g. change during battle, which is impossible with the `SecureActionButtonTemplate`).
+I decided to give this project a rework because WeakAuras recommends not using the `SecureActionButtonTemplate` because it's obviously quite the oppsosite of what WeakAuras should do (e.g. change during battle, which is impossible with the `SecureActionButtonTemplate`).
 
 ## What is this for?
 
