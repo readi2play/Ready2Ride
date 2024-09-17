@@ -1,37 +1,73 @@
 local L = R2R.L
 
 -- L[""] = ""
+
+--[[ General ]]--
+L["SkyridingButton"] = "SkyridingButton"
+L["Reset"] = "Reset"
+L["Clear all"] = "Clear all"
+L["Unselect all"] = "Unselect all"
+L["Select all"] = "Select all"
+L["Cancel"] = "Cancel"
+L["OK"] = "OK"
+L["Submit"] = "Submit"
+L["Yes"] = "Yes"
+L["No"] = "No"
+
 --[[ Info ]]--
-L["Version"] = "Version"
-L["%d |4Author:Authors;:"] = "%d |4Author:Authors;:"
-L["%d |4Slash Commands;:"] = "%d |4Slash Commands;:"
+L["Info"] = "Info"
+L["Version: "] = "Version: "
+L["Author: "] = "Author: "
+L["Core Features"] = "Core Features"
+L["Switch Flight Style"] = "Switch Flight Style"
 L[ [=[
-  Use the following slash command to open up this config panel and to adjust the Size and Position of the %1$. You might also want to configure specific mounts for specific zones or situations like swimming, indoors or while holding a modifier key.
+- Right click the %1$s to easily %2$s
+- Hold SHIFT while left clicking the %1$s to display your current zone and continent (incl. their MapIDs)
+- Saddle onto your configured Mount
+    - per continent
+    - per zone (if configured, falls back to continent specific Mount)
+    - when swimming (if configured)
+- Configure a movement ability to be used in no-mount areas (e.g. indoors)
+- Place the %1$s wherever you want on your screen
+- The %1$s is accessible via Macros using %3$s
+]=] ] = [=[
+- Right click the %1$s to easily %2$s
+- Hold SHIFT while left clicking the %1$s to display your current zone and continent (incl. their MapIDs)
+- Saddle onto your configured Mount
+    - per continent
+    - per zone (if configured, falls back to continent specific Mount)
+    - when swimming (if configured)
+- Configure a movement ability to be used in no-mount areas (e.g. indoors)
+- Place the %1$s wherever you want on your screen
+- The %1$s is accessible via Macros using %3$s
+]=]
+L["Slash Command"] = "Slash Command"
+L[ [=[
+Use the following slash command to open up this config panel and to adjust the Size and Position of the %1$s. You might also want to configure specific mounts for specific zones or situations like swimming or being indoors.
 
-    %3$
+    %3$s
 
 
+Thanks for using %4$s and stay healthy
 
-  Thanks for using %3$ and stay healthy
+Yours sincerely
 
-  Yours sincerely
-
-  %2$
+%2$s
 ]=] ] =  [=[
-  Use the following slash command to open up this config panel and to adjust the Size and Position of the %1$. You might also want to configure specific mounts for specific zones or situations like swimming, indoors or while holding a modifier key.
+Use the following slash command to open up this config panel and to adjust the Size and Position of the %1$s. You might also want to configure specific mounts for specific zones or situations like swimming or being indoors.
 
-    %3$
+    %3$s
 
 
+Thanks for using %4$s and stay healthy
 
-  Thanks for using %3$ and stay healthy
+Yours sincerely
 
-  Yours sincerely
-
-  %2$
+%2$s
 ]=]
 L["powered by"] = "powered by"
 --[[ Frame Settings ]]--
+L["Anchoring"] = "Frame Settings"
 L["Frame Settings"] = "Frame Settings"
 L["Button Anchor"] = "Button Anchor"
 L["Select the anchor point of the %s that should be aligned to its parent frame."] = "Select the anchor point of the %s that should be aligned to its parent frame."
@@ -51,20 +87,28 @@ L["Mount"] = "Mount"
 L["Select the mount to be used for this continent"] = "Select the mount to be used for this continent"
 L["Select the mount to be used for this specific zone"] = "Select the mount to be used for this specific zone"
 
---[[ Keybindings Settings ]]--
-L["Activate Keybindings"] = "Activate Keybindings"
-L["Select a mount for left ALT-Key"] = "Select a mount for left ALT-Key"
-L["Select a mount for left CTRL-Key"] = "Select a mount for left CTRL-Key"
-L["Select a mount for left SHIFT-Key"] = "Select a mount for left SHIFT-Key"
-L["Use specific mount when swimming"] = "Use specific mount when swimming"
-L["Use specific ability when indoors"] = "Use specific ability when indoors"
+--[[ Special Settings ]]--
+L["Specials"] = "Special Bindings"
+L["Special Bindings"] = "Special Bindings"
+-- L["Select a mount for left ALT-Key"] = "Select a mount for left ALT-Key"
+-- L["Select a mount for left CTRL-Key"] = "Select a mount for left CTRL-Key"
+-- L["Select a mount for left SHIFT-Key"] = "Select a mount for left SHIFT-Key"
+L["When Swimming"] = "When Swimming"
+L["Select a specific mount or ability to be used while swimming. To do so either use the Dropdown to select an aquatic mount or enter the |cFFFFE680name|r or |cFFFFE680spellID|r of your ability of choice into the Editbox."] = "Select a specific mount or ability to be used while swimming. To do so either use the Dropdown to select an aquatic mount or enter the |cFFFFE680name|r or |cFFFFE680spellID|r of your ability of choice into the Editbox."
+L["Invalid |cFFFFE680SpellID|r or |cFFFFE680spell name|r. Please check your input and try again."] = "Invalid |cFFFFE680SpellID|r or |cFFFFE680spell name|r. Please check your input and try again."
+L["When in No-Mount Area"] = "When in No-Mount Area"
+L["Select a specific ability to be used while in a no-mount area (e.g. being indoors). To do so enter the |cFFFFE680name|r or |cFFFFE680spellID|r of your ability of choice into the Editbox."] = "Select a specific ability to be used while in a no-mount area (e.g. being indoors). To do so enter the |cFFFFE680name|r or |cFFFFE680spellID|r of your ability of choice into the Editbox."
 
 --[[ Profile Settings ]]--
 L["Profiles"] = "Profiles"
+L["Default"] = "Default"
 L["Character Profiles"] = "Character Profiles"
 L["This section allows you to select the currently active storage profile so you can define different settings for different characters which leads to much more flexible configurations."] = "This section allows you to select the currently active storage profile so you can define different settings for different characters which leads to much more flexible configurations."
 L["Activate character specific profiles"] = "Activate character specific profiles"
 L["Select the profile to be used for this Character"] = "Select the profile to be used for this Character"
 L["Copy from ..."] = "Copy from ..."
 L["Delete Profile"] = "Delete Profile"
+L["This checkbox allows you to activate or deactivate character specific storage profiles allowing you to individually configure the SkyridingButton for each of your characters."] = "This checkbox allows you to activate or deactivate character specific storage profiles allowing you to individually configure the SkyridingButton for each of your characters."
+L["This will copy settings from another profile into the active one when hitting the \"%s\" button."] = "This will copy settings from another profile into the active one when hitting the \"%s\" button."
+L["Hit the \"%s\" button to remove an unused or no longer required profile."] = "Hit the \"%s\" button to remove an unused or no longer required profile."
 L["Are your sure that you want to delete the profile %s"] = "Are your sure that you want to delete the profile %s"

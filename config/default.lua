@@ -13,8 +13,11 @@ R2R.defaults = {
     button_strata = "PARENT",
   },
   bindings = {
-    indoors = 2645,
-    swimming = 420,
+    indoors = "",
+    swimming = {
+      mount = 420,
+      ability = ""
+    },
   },
   continents = {
     ["407"] = { -- Darkmoon Island

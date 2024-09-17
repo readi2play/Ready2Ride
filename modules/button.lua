@@ -7,7 +7,7 @@ local function CreateButton()
   --[[--------------------------------------------------------------------------
   button creation
   --------------------------------------------------------------------------]]--
-  R2R.SkyButton = R2R.SkyButton or CreateFrame("Button", "R2R_SkyridingButton", _G[R2R.config.anchoring.frame], "SecureActionButtonTemplate")
+  R2R.SkyButton = R2R.SkyButton or CreateFrame("Button", "R2R_SkyridingButton", _G[R2R.db.anchoring.frame], "SecureActionButtonTemplate")
   R2R.SkyButton:SetFrameLevel(100)
   R2R.SkyButton:SetHighlightTexture(READI.T.rdl110004, "ADD")
   R2R.SkyButton:EnableKeyboard()
@@ -22,7 +22,7 @@ local function CreateButton()
   --------------------------------------------------------------------------]]--
   R2R.SkyButton.tooltip = R2R.SkyButton.tooltip or CreateFrame("GameTooltip", AddonName.."Tooltip", UIParent, "GameTooltipTemplate")
   R2R.SkyButton.background = R2R.SkyButton.background or R2R.SkyButton:CreateTexture(AddonName .. "Background", "BACKGROUND")
-  R2R.SkyButton.border = R2R.SkyButton.border or R2R.SkyButton:CreateTexture(AddonName .. "Border", "OVERLAY")
+  R2R.SkyButton.border = R2R.SkyButton.border or R2R.SkyButton:CreateTexture(AddonName .. "Border", "BORDER")
   R2R.SkyButton.icon = R2R.SkyButton.icon or R2R.SkyButton:CreateTexture(AddonName .. "Icon", "ARTWORK")
   R2R.SkyButton.mask = R2R.SkyButton.mask or R2R.SkyButton:CreateMaskTexture()
 
@@ -39,29 +39,30 @@ local function CreateButton()
       if IsOutdoors() or IsIndoors() == nil then
         r2r.id = R2R:GetMountID()
       else
-        r2r.id = R2R.config.bindings.indoors
+        r2r.id = R2R.db.bindings.indoors
       end
 
-      if not r2r.id then
+
+      if not r2r.id or r2r.id == "" then
         R2R.SkyButton:Clear()
-      end
-
-
-      local isMount = R2R:IsMount(r2r.id)
-      if isMount then
-        r2r.name, r2r.spellID, r2r.icon = R2R:GetMount(r2r.id)
+        return
       else
-        local _spell = C_Spell.GetSpellInfo(r2r.id)
-        r2r.name = _spell.name
-        r2r.icon = _spell.iconID
-        r2r.spellID = _spell.spellID
-
-        if not IsSpellKnown(r2r.spellID) then
-          r2r.id = nil
-          R2R.SkyButton:Clear()
-          return
+        local spell = C_Spell.GetSpellInfo(r2r.id)
+        if not spell then
+          r2r.name, r2r.spellID, r2r.icon = R2R:GetMount(r2r.id)
+        else
+          r2r.name = spell.name
+          r2r.icon = spell.iconID
+          r2r.spellID = spell.spellID
+  
+          if not IsSpellKnown(r2r.spellID) then
+            r2r.id = nil
+            R2R.SkyButton:Clear()
+            return
+          end
         end
       end
+
 
       --[[----------------------------------------------------------------------
       set icon
@@ -79,16 +80,16 @@ local function CreateButton()
   r2r.iconPos = 0
   function R2R.SkyButton:SetPosition()
     R2R.SkyButton:ClearAllPoints()
-    R2R.SkyButton:SetPoint(R2R.config.anchoring.button_anchor, R2R.config.anchoring.frame, R2R.config.anchoring.parent_anchor, R2R.config.anchoring.position_x, R2R.config.anchoring.position_y)
+    R2R.SkyButton:SetPoint(R2R.db.anchoring.button_anchor, R2R.db.anchoring.frame, R2R.db.anchoring.parent_anchor, R2R.db.anchoring.position_x, R2R.db.anchoring.position_y)
   end
 
   function R2R.SkyButton:ScaleButton()
-    R2R.SkyButton:SetSize(R2R.config.anchoring.button_size, R2R.config.anchoring.button_size)
-    R2R.SkyButton.mask:SetSize(R2R.config.anchoring.button_size, R2R.config.anchoring.button_size)
+    R2R.SkyButton:SetSize(R2R.db.anchoring.button_size, R2R.db.anchoring.button_size)
+    R2R.SkyButton.mask:SetSize(R2R.db.anchoring.button_size, R2R.db.anchoring.button_size)
   end
 
   function R2R.SkyButton:SetStrata()
-    local btnStrata = R2R.config.anchoring.button_strata
+    local btnStrata = R2R.db.anchoring.button_strata
     if btnStrata == "PARENT" then
       local parent = R2R.SkyButton:GetParent() 
       R2R.SkyButton:SetFrameStrata(parent:GetFrameStrata())
@@ -194,19 +195,19 @@ function R2R:InitializeButton()
       R2R.SkyButton:Update()
     end
 
-    function R2R.SkyButton:MODIFIER_STATE_CHANGED(evt, key, down)
-      if InCombatLockdown() then return end
+    -- function R2R.SkyButton:MODIFIER_STATE_CHANGED(evt, key, down)
+    --   if InCombatLockdown() then return end
       
-      if down > 0 then
-        if key == "LALT" then R2R.ActiveKeys[1] = key end
-        if key == "LCTRL" then R2R.ActiveKeys[2] = key end
-        if key == "LSHIFT" then R2R.ActiveKeys[3] = key end
-      else
-        if key == "LALT" then R2R.ActiveKeys[1] = nil end
-        if key == "LCTRL" then R2R.ActiveKeys[2] = nil end
-        if key == "LSHIFT" then R2R.ActiveKeys[3] = nil end
-      end
-    end
+    --   if down > 0 then
+    --     if key == "LALT" then R2R.ActiveKeys[1] = key end
+    --     if key == "LCTRL" then R2R.ActiveKeys[2] = key end
+    --     if key == "LSHIFT" then R2R.ActiveKeys[3] = key end
+    --   else
+    --     if key == "LALT" then R2R.ActiveKeys[1] = nil end
+    --     if key == "LCTRL" then R2R.ActiveKeys[2] = nil end
+    --     if key == "LSHIFT" then R2R.ActiveKeys[3] = nil end
+    --   end
+    -- end
   --[[------------------------------------------------------------------------
   handling the mouseover event to show the tooltip of the selected mount
   ------------------------------------------------------------------------]]--
@@ -216,8 +217,8 @@ function R2R:InitializeButton()
         --[[----------------------------------------------------------------------
         set tooltip
         ----------------------------------------------------------------------]]--
-          local isMount = R2R:IsMount(r2r.id)
-          if isMount then
+        local isSpell = C_Spell.GetSpellInfo(r2r.id) ~= nil
+        if not isSpell then
             R2R.SkyButton.tooltip:SetMountBySpellID(r2r.spellID)
           else
             local i = 1
@@ -262,8 +263,8 @@ function R2R:InitializeButton()
         x = ButtonPosition.dragOut[4] - ButtonPosition.dragInit[4],
         y = ButtonPosition.dragOut[5] - ButtonPosition.dragInit[5],
       }
-      R2R.config.anchoring.position_x = format("%.2f", R2R.config.anchoring.position_x + delta.x)
-      R2R.config.anchoring.position_y = format("%.2f", R2R.config.anchoring.position_y + delta.y)
+      R2R.db.anchoring.position_x = format("%.2f", R2R.db.anchoring.position_x + delta.x)
+      R2R.db.anchoring.position_y = format("%.2f", R2R.db.anchoring.position_y + delta.y)
 
       R2R:UpdateOptions(false)
     end)
