@@ -185,6 +185,7 @@ function R2R:InitializeButton()
   ------------------------------------------------------------------------]]--
     R2R.SkyButton:RegisterEvent("MOUNT_JOURNAL_USABILITY_CHANGED")
     R2R.SkyButton:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+    R2R.SkyButton:RegisterEvent("PLAYER_REGEN_ENABLED")
     R2R.SkyButton:RegisterEvent("ZONE_CHANGED")
   --[[------------------------------------------------------------------------
   generic event handler so we can implement dedicated methods for each event

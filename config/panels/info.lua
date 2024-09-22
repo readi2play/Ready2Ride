@@ -4,26 +4,23 @@ BASICS
 local AddonName, r2r = ...
 local data = CopyTable(R2R.data)
 data.keyword = "info"
-local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
-
-local addon = {
-  ["icon"] = GetAddOnMetadata(AddonName, "IconTexture"),
-  ["version"] = GetAddOnMetadata(AddonName, "Version"),
-  ["author"] = GetAddOnMetadata(AddonName, "Author"),
-}
-local lib = {
-  ["title"] = GetAddOnMetadata("readiLIB", "Title"), 
-  ["icon"] = GetAddOnMetadata("readiLIB", "IconTexture"),
-  ["version"] = GetAddOnMetadata("readiLIB", "Version"),
-  ["author"] = GetAddOnMetadata("readiLIB", "Author"),
-}
 --------------------------------------------------------------------------------
 -- OPTIONS PANEL CREATION
 --------------------------------------------------------------------------------
 function R2R:FillInfoPanel(panel, container, anchorline)
+  local padding = 0
+  if panel == R2R.ConfigDialog then
+    r2r.windowWidth = ceil(container:GetWidth() - 20)
+    padding = 10
+  else
+    r2r.windowWidth = SettingsPanel.Container:GetWidth()
+    padding = 18
+  end
+  r2r.columnWidth = r2r.windowWidth / r2r.columns - 20
+
   local logo = READI:Icon(data, {
-    texture = addon.icon,
-    name = format("%s Logo", AddonName),
+    texture = R2R.icon,
+    name = format("%s%sLogo", panel:GetName() or "SettingsPanel", AddonName),
     region = container,
     width = 80,
     height = 80,
@@ -38,13 +35,13 @@ function R2R:FillInfoPanel(panel, container, anchorline)
   infos_text:SetPoint("TOP", headline_infos, "BOTTOM", 0, -5)
   infos_text:SetText(
     READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Version: "]) ..
-    READI.Helper.color:Get("white", nil, addon.version.."\n") ..
+    READI.Helper.color:Get("white", nil, R2R.version.."\n") ..
     READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Author: "]) ..
-    READI.Helper.color:Get("readi", nil, addon.author.."\n")
+    READI.Helper.color:Get("readi", nil, R2R.author.."\n")
   )
 
   local headline_features = container:CreateFontString("ARTWORK", nil, "GameFontHighlightLarge")
-  headline_features:SetPoint("TOPLEFT", container, 0, -180)
+  headline_features:SetPoint("TOPLEFT", container, 10, -180)
   headline_features:SetText(READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Core Features"]))
 
   local text_features = container:CreateFontString("ARTWORK", nil, "GameFontHighlight")
@@ -52,7 +49,7 @@ function R2R:FillInfoPanel(panel, container, anchorline)
   text_features:SetJustifyH("LEFT")
   text_features:SetJustifyV("TOP")
   text_features:SetWordWrap(true)
-  text_features:SetWidth(r2r.windowWidth - 18)
+  text_features:SetWidth(r2r.windowWidth - padding)
   text_features:SetText(
     READI.Helper.color:Get("white", nil, format(
       R2R.L[ [=[
@@ -81,7 +78,7 @@ function R2R:FillInfoPanel(panel, container, anchorline)
   text_commands:SetJustifyH("LEFT")
   text_commands:SetJustifyV("TOP")
   text_commands:SetWordWrap(true)
-  text_commands:SetWidth(r2r.windowWidth - 18)
+  text_commands:SetWidth(r2r.windowWidth - padding)
   text_commands:SetText(
     READI.Helper.color:Get("white", nil, format(
       R2R.L[ [=[
@@ -97,27 +94,28 @@ Yours sincerely
 %2$s
 ]=] ],
       READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["SkyridingButton"]),
-      READI.Helper.color:Get("readi", nil, addon.author),
+      READI.Helper.color:Get("readi", nil, R2R.author),
       format("%s %s", READI.Helper.color:Get("r2r", R2R.Colors, "/sky"), READI.Helper.color:Get("r2r_light", R2R.Colors, "config")),
       READI.Helper.color:Get("r2r", R2R.Colors, AddonName)
     ))
   )
 
-  local libLogo = READI:Icon(data, {
-    texture = lib.icon,
-    name = format("%s Logo", "readiLIB"),
-    region = panel,
-    width = 16,
-    height = 16,
-  })
-
-  local libText = panel:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
-  libText:SetPoint("BOTTOMRIGHT", panel, "BOTTOMRIGHT", -5,5)
-  libText:SetText(READI.Helper.color:Get("white", nil, format("%s v%s", lib.title, lib.version)))
-
-  libLogo:SetPoint("RIGHT", libText, "LEFT", -5, 0)
-
-  local powered_by = panel:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
-  powered_by:SetPoint("RIGHT", libLogo, "LEFT", -5,0)
-  powered_by:SetText(READI.Helper.color:Get("white", nil, "powered by:"))
+  if panel ~= R2R.ConfigDialog then
+    local libLogo = READI:Icon(data, {
+      texture = READI.icon,
+      name = format("%s%sLogo", "SettingsPanel", READI.title),
+      region = panel,
+      width = 16,
+      height = 16,
+    })
+    local libText = panel:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
+    libText:SetPoint("BOTTOMRIGHT", panel, "BOTTOMRIGHT", -5,5)
+    libText:SetText(READI.Helper.color:Get("white", nil, format("%s v%s", READI.title, READI.version)))
+  
+    libLogo:SetPoint("RIGHT", libText, "LEFT", -5, 0)
+  
+    local powered_by = panel:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
+    powered_by:SetPoint("RIGHT", libLogo, "LEFT", -5,0)
+    powered_by:SetText(READI.Helper.color:Get("white", nil, "powered by:"))
+  end
 end

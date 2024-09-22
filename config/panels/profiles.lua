@@ -6,7 +6,8 @@ BASICS
   data.keyword = "profiles"
   local charName = format("%s-%s", GetUnitName("player"), GetRealmName())
   local __default = "global"
---[[----------------------------------------------------------------------------
+  local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
+  --[[----------------------------------------------------------------------------
 CREATE PROFILES PANEL CONTENT
 ----------------------------------------------------------------------------]]--
 local Profiler = {
@@ -106,10 +107,10 @@ R2R.Profile = R2R.Profile or {
         __p.text:SetJustifyH(READI.ANCHOR_LEFT)
         __p.text:SetJustifyV(READI.ANCHOR_TOP)
         __p.text:SetWordWrap(true)
-    
+
         if __p.icon then
-          __p.icon:SetPoint(READI.CENTER, __p, READI.ANCHOR_TOPLEFT, 10,-10)
-          __p.icon:SetFrameStrata(READI.DIALOG)
+          __p.icon:SetPoint(READI.ANCHOR_CENTER, __p, READI.ANCHOR_TOPLEFT, 10,-10)
+          __p.icon:SetFrameStrata(READI.Strata[6])
           __p.icon:SetFrameLevel(100)
         end
       end
@@ -117,7 +118,7 @@ R2R.Profile = R2R.Profile or {
     define the frame name of the prompt and reuse the frame if already existent
     create a new dialog frame otherwise
     ----------------------------------------------------------------------]]--
-      local promptName = "DeleteProfilePrompt"
+      local promptName = "R2R_DeleteProfilePrompt"
       local prompt = _G[promptName] or READI:Dialog(data, {
         name = promptName,
         title = READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Delete Profile"]),
@@ -127,38 +128,52 @@ R2R.Profile = R2R.Profile or {
           width = 42,
         },
         buttonSet = {
-          confirm = R2R.L["Yes"],
-          cancel = R2R.L["No"],
+          {
+            key = "cancel",
+            label = R2R.L["No"],
+            offsetY = 10,
+            parent = {
+              anchor = READI.ANCHOR_BOTTOMRIGHT,
+            },
+            onClick = function() end
+          },
+          {
+            key = "confirm",
+            label = R2R.L["Yes"],
+            parent = {
+              anchor = READI.ANCHOR_BOTTOMLEFT,
+            },
+                onClick = function()
+              local __selection = Profiler.deleteProfile.dropdown:GetValue()
+              local __active = Profiler.activeProfile.dropdown:GetValue()
+    
+              local src = _G[AddonName.."DB"].chars[__selection]
+              if __selection == __active then
+                if __selection == charName then
+                  R2R.db = _G[AddonName.."DB"].global
+                  Profiler.activeProfile.dropdown:SetValue(Profiler.defaultProfile.val, Profiler.defaultProfile.txt)
+                else
+                  R2R.db = _G[AddonName.."DB"].chars[charName]
+                  Profiler.activeProfile.dropdown:SetValue(charName)
+                end
+              end      
+              local __actIdx = READI.Helper.table:Get(Profiler.activeProfile.dropdown.MenuList, function(k,v) return v == __selection end)
+              table.remove(Profiler.activeProfile.dropdown.MenuList, __actIdx)
+        
+              local __copIdx = READI.Helper.table:Get(Profiler.copyProfile.dropdown.MenuList, function(k,v) return v == __selection end)
+              table.remove(Profiler.copyProfile.dropdown.MenuList, __copIdx)
+        
+              local __delIdx = READI.Helper.table:Get(Profiler.deleteProfile.dropdown.MenuList, function(k,v) return v == __selection end)
+              table.remove(Profiler.deleteProfile.dropdown.MenuList, __delIdx)
+        
+              _G[AddonName.."DB"].chars[__selection] = nil
+              R2R:UpdateOptions()
+            end
+          }
         },
+        allowKeyboard = true,
         closeOnEsc = true,
         createHidden = false,
-        onOkay = function()
-          local __selection = Profiler.deleteProfile.dropdown:GetValue()
-          local __active = Profiler.activeProfile.dropdown:GetValue()
-
-          local src = _G[AddonName.."DB"].chars[__selection]
-          if __selection == __active then
-            if __selection == charName then
-              R2R.db = _G[AddonName.."DB"].global
-              Profiler.activeProfile.dropdown:SetValue(Profiler.defaultProfile.val, Profiler.defaultProfile.txt)
-            else
-              R2R.db = _G[AddonName.."DB"].chars[charName]
-              Profiler.activeProfile.dropdown:SetValue(charName)
-            end
-          end      
-          local __actIdx = READI.Helper.table:Get(Profiler.activeProfile.dropdown.MenuList, function(k,v) return v == __selection end)
-          table.remove(Profiler.activeProfile.dropdown.MenuList, __actIdx)
-    
-          local __copIdx = READI.Helper.table:Get(Profiler.copyProfile.dropdown.MenuList, function(k,v) return v == __selection end)
-          table.remove(Profiler.copyProfile.dropdown.MenuList, __copIdx)
-    
-          local __delIdx = READI.Helper.table:Get(Profiler.deleteProfile.dropdown.MenuList, function(k,v) return v == __selection end)
-          table.remove(Profiler.deleteProfile.dropdown.MenuList, __delIdx)
-    
-          _G[AddonName.."DB"].chars[__selection] = nil
-          R2R:UpdateOptions()
-        end,
-        onCancel = function() end,
         onClose = function()
           Profiler.deleteProfile.dropdown:SetValue(nil)
         end
@@ -171,6 +186,14 @@ R2R.Profile = R2R.Profile or {
   end,
 }
 function R2R:FillProfilesPanel(panel, container, anchorline)
+  if panel == R2R.ConfigDialog then
+    r2r.windowWidth = ceil(container:GetWidth() - 20)
+    return
+  else
+    r2r.windowWidth = SettingsPanel.Container:GetWidth()
+  end
+  r2r.columnWidth = r2r.windowWidth / r2r.columns - 20
+
   --[[---------------------------------------------------------------------------
   Toggle profile usage
   ---------------------------------------------------------------------------]]--
@@ -244,7 +267,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
   --[[----------------------------------------------------------------------------
   Active Profile section
   ----------------------------------------------------------------------------]]--
-    Profiler.activeProfile.list = READI.Helper.table:Keys(_G[AddonName.."DB"].chars)
+    Profiler.activeProfile.list = READI.Helper.table:Filter(READI.Helper.table:Keys(_G[AddonName.."DB"].chars), function(val) return val ~= __default end)
     table.insert(Profiler.activeProfile.list, 1, Profiler.defaultProfile)
     --------------------------------------------------------------------------------
     Profiler.activeProfile.label = wrapper:CreateFontString(READI.ARTWORK, nil, "GameFontNormal")
@@ -311,7 +334,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
   --[[----------------------------------------------------------------------------
   Delete Profile section
   ----------------------------------------------------------------------------]]--
-    Profiler.deleteProfile.list = READI.Helper.table:Keys(_G[AddonName.."DB"].chars)
+    Profiler.deleteProfile.list = READI.Helper.table:Filter(READI.Helper.table:Keys(_G[AddonName.."DB"].chars), function(val) return val ~= __default end)
     --------------------------------------------------------------------------------
     Profiler.deleteProfile.label = wrapper:CreateFontString(READI.ARTWORK, nil, "GameFontNormal")
     Profiler.deleteProfile.label:SetPoint(READI.ANCHOR_TOPLEFT, Profiler.copyProfile.label, READI.ANCHOR_TOPLEFT, r2r.columnWidth, 0)

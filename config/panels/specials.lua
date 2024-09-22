@@ -23,6 +23,14 @@ R2R.Specials = R2R.Specials or {
 OPTIONS PANEL CREATION
 ----------------------------------------------------------------------------]]--
 function R2R:FillSpecialsPanel(panel, container, anchorline)
+  if panel == R2R.ConfigDialog then
+    r2r.windowWidth = ceil(container:GetWidth() - 20)
+    return
+  else
+    r2r.windowWidth = SettingsPanel.Container:GetWidth()
+  end
+  r2r.columnWidth = r2r.windowWidth / r2r.columns - 20
+
   local isSwimmingAbility = false
   if R2R.db.bindings.swimming.ability ~= "" then
     isSwimmingAbility = C_Spell.GetSpellInfo(R2R.db.bindings.swimming.ability) ~= nil

@@ -11,6 +11,14 @@ R2R.Anchoring = R2R.Anchoring or {
   fields = {},
 }
 function R2R:FillAnchoringPanel(panel, container, anchorline)
+  if panel == R2R.ConfigDialog then
+    r2r.windowWidth = ceil(container:GetWidth() - 20)
+    return
+  else
+    r2r.windowWidth = SettingsPanel.Container:GetWidth()
+  end
+  r2r.columnWidth = r2r.windowWidth / r2r.columns - 20
+
   local function BuildAnchorGrid(wrapper, cols, option)
     for i,value in ipairs(READI.Anchors) do
       local parent = wrapper

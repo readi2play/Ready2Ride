@@ -3,7 +3,10 @@ local AddonName, r2r = ...
 -- ADDON MAIN FRAME AND LOCALIZATION TABLE
 ----------------------------------------------------------------------------]]--
 R2R = CreateFrame("Frame")
-
+R2R.title = READI.GetAddOnMetadata(AddonName, "Title")
+R2R.icon = READI.GetAddOnMetadata(AddonName, "IconTexture")
+R2R.version = READI.GetAddOnMetadata(AddonName, "Version")
+R2R.author = READI.GetAddOnMetadata(AddonName, "Author")
 
 R2R.Colors = READI.Helper.table:Merge(
   CopyTable(READI.Colors), {
@@ -11,12 +14,26 @@ R2R.Colors = READI.Helper.table:Merge(
     r2r_light = "ffe680"
   }
 )
-
 R2R.data = {
-  ["addon"] = "Ready2Ride",
+  ["addon"] = R2R.title,
   ["prefix"] = "R2R",
   ["colors"] = R2R.Colors
 }
+--[[----------------------------------------------------------------------------
+TEXTURES
+----------------------------------------------------------------------------]]--
+Ready2RideLogo = "Interface\\AddOns\\Ready2Ride\\Media\\r2r_logo"
+--[[------------------------------------------------------------------------]]--
+MountSelectorTileBackground = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_TileBackground"
+MountSelectorTileBorder = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_TileBorder"
+MountSelectorIconMask = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_TileIconMaskrder"
+MountSelectorSelectionIndicator = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_SelectionIndicator"
+MountSelectorFilterGrounded = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_FilterGrounded"
+MountSelectorFilterFlying = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_FilterFlying"
+MountSelectorFilterAquatic = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_FilterAquatic"
+MountSelectorFilterDynamic = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_FilterDynamic"
+--[[------------------------------------------------------------------------]]--
+
 R2R.Locale = GAME_LOCALE or GetLocale()
 R2R.L = {}
 
@@ -202,6 +219,8 @@ function R2R:InitializeDB ()
 
     if _ap ~= "global" then
       _G[dbName].chars[_ap] = READI.Helper.table:Merge({}, CopyTable(R2R.defaults), _G[dbName].chars[_ap])
+    else
+      _G[dbName].chars[_ap] = _G[dbName].global
     end
 
     R2R.db = _G[dbName].chars[_ap]
@@ -235,11 +254,13 @@ end
 -- define the corresponding slash command handlers
 SlashCmdList.R2R = function(msg, editBox)
   msg = string.lower(msg)
-  local infoKeywords = {"", "help"}
+  local infoKeywords = {"help"}
   local configKeywords = {"config"}
   if READI.Helper.table:Contains(msg, configKeywords) then
     _G[AddonName .. '_Options']()
-  else
+  elseif READI.Helper.table:Contains(msg, infoKeywords) then
     InfoCommandHandler()
+  else
+    R2R.ConfigDialog:Show()
   end
 end

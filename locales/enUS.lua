@@ -8,8 +8,9 @@ L["Reset"] = "Reset"
 L["Clear all"] = "Clear all"
 L["Unselect all"] = "Unselect all"
 L["Select all"] = "Select all"
+L["Close"] = "Close"
 L["Cancel"] = "Cancel"
-L["OK"] = "OK"
+L["Okay"] = "Okay"
 L["Submit"] = "Submit"
 L["Yes"] = "Yes"
 L["No"] = "No"
@@ -65,7 +66,7 @@ Yours sincerely
 
 %2$s
 ]=]
-L["powered by"] = "powered by"
+L["powered by:"] = "powered by:"
 --[[ Frame Settings ]]--
 L["Anchoring"] = "Frame Settings"
 L["Frame Settings"] = "Frame Settings"

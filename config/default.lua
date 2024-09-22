@@ -455,8 +455,12 @@ R2R.defaults = {
         ["2215"] = { mountID = 1051 },
          -- Azj-Kahet
         ["2255"] = { mountID = 2181 },
+         -- Azj-Kahet Lower Levels
+        ["2256"] = { mountID = 2181 },
          -- City of Threads Umbral Bazaar
         ["2213"] = { mountID = 2181 },
+         -- City of Threads Lower Levels
+        ["2216"] = { mountID = 2181 },
       }
     }
   }
