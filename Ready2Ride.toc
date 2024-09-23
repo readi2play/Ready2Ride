@@ -2,7 +2,7 @@
 ## Title: Ready2Ride by |cFF78B064readi2play|r 
 ## Notes: Configure a different mount for each zone or for whole continents and allow easy toggle between static and dynamic flying style.
 ## IconTexture: Interface\AddOns\Ready2Ride\media\r2r_logo.tga
-## Version: 0.7.5
+## Version: 0.8.1
 ## Author: |cFF78B064readi2play|r
 ## SavedVariables: Ready2RideDB
 ## SavedVariablesPerCharacter: Ready2RideDBChr
@@ -32,6 +32,7 @@ locales/zhTW.lua
 config/default.lua
 config/config.lua
 config/panels/info.lua
+config/panels/mounts.lua
 config/panels/anchoring.lua
 config/panels/specials.lua
 config/panels/profiles.lua

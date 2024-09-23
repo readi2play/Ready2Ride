@@ -22,7 +22,7 @@ function CreateConfigDialog()
     name = format("%s_%sDialog", data.prefix, READI.Helper.string:Capitalize(data.keyword)),
     -- createHidden = true,
     title = {
-      text = READI.Helper.color:Get("white", nil, format("%1$s by %3$s v%2$s", READI.Helper.color:Get("r2r", R2R.Colors, AddonName), R2R.version, R2R.author)),
+      text = READI.Helper.color:Get("white", nil, format("%1$s %2$s", READI.Helper.color:Get("r2r", R2R.Colors, AddonName), R2R.L["Configuration"])),
       offsetY = -4
     },
     width = math.floor(GetScreenWidth()),
@@ -82,31 +82,43 @@ function CreateConfigDialog()
     }
   }
 
-  return READI:Dialog(data, settings)
+  local dialog = READI:Dialog(data, settings)
 
-  -- local libLogo = READI:Icon(data, {
-  --   texture = RD.icon,
-  --   name = format("%s Logo", "readiLIB"),
-  --   region = R2R.ConfigDialog,
-  --   width = 14,
-  --   height = 14,
-  -- })
+  local libLogo = READI:Icon(data, {
+    texture = RD.icon,
+    name = format("%s Logo", "readiLIB"),
+    region = dialog,
+    width = 14,
+    height = 14,
+  })
 
-  -- local libText = R2R.ConfigDialog:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
-  -- libText:SetPoint(READI.ANCHOR_BOTTOMRIGHT, R2R.ConfigDialog, READI.ANCHOR_BOTTOMRIGHT, -72,5)
-  -- libText:SetText(READI.Helper.color:Get("white", nil, format("%s v%s", R2R.title, R2R.version)))
+  local libText = dialog:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
+  libText:SetPoint(READI.ANCHOR_BOTTOMRIGHT, dialog, READI.ANCHOR_BOTTOMRIGHT, -72,5)
+  libText:SetText(READI.Helper.color:Get("white", nil, format("%s v%s", READI.title, READI.version)))
 
-  -- libLogo:SetPoint(READI.ANCHOR_RIGHT, libText, READI.ANCHOR_LEFT, -5, 0)
+  libLogo:SetPoint(READI.ANCHOR_RIGHT, libText, READI.ANCHOR_LEFT, -5, 0)
 
-  -- local powered_by = R2R.ConfigDialog:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
-  -- powered_by:SetPoint(READI.ANCHOR_RIGHT, libLogo, READI.ANCHOR_LEFT, -5,0)
-  -- powered_by:SetText(READI.Helper.color:Get("white", nil, R2R.L["powered by:"]))
+  local powered_by = dialog:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
+  powered_by:SetPoint(READI.ANCHOR_RIGHT, libLogo, READI.ANCHOR_LEFT, -5,0)
+  powered_by:SetText(READI.Helper.color:Get("white", nil, R2R.L["powered by:"]))
+
+  return dialog
 end
 --[[----------------------------------------------------------------------------
 -- OPTIONS PANEL CREATION
 ----------------------------------------------------------------------------]]--
 function R2R:SetupConfig()
   R2R.ConfigDialog = R2R.ConfigDialog or CreateConfigDialog()
+
+  function R2R.ConfigDialog:Clear()
+    for i, key in ipairs(configKeys) do
+      if key ~= "info" then
+        if R2R.config[configKeys[i]] and R2R.config[configKeys[i]].container then
+          R2R.config[configKeys[i]].container:Hide()
+        end
+      end
+    end
+  end
 
   local infoWidth = 450
 
@@ -119,27 +131,62 @@ function R2R:SetupConfig()
       R2R.settings[key] = R2R.settings[key] or {}
       local panelName = R2R.L[READI.Helper.string:Capitalize(key)]
       local parentPanel = nil
-      local titleText = R2R.L[READI.Helper.string:Capitalize(key)]
+      local c_titleText = R2R.L[READI.Helper.string:Capitalize(key)]
+      local s_titleText = R2R.L[READI.Helper.string:Capitalize(key)]
       local l_offsetX, l_offsetY, r_offsetX, r_offsetYich, panelHidden, c_width
 
       if key == "info" then
         panelName = AddonName
-        titleText = AddonName
+        c_titleText = nil
+        s_titleText = AddonName
         l_offsetX = 10
         l_offsetY = -72
-        c_width = infoWidth
+        c_width = infoWidth        
       else
         parentPanel = AddonName
         l_offsetX = infoWidth + 20
-        l_offsetY = -72
+        l_offsetY = -100
         r_offsetX = -10
         r_offsetY = 72
         c_width = nil
         panelHidden = true
       end
-  
-      --------------------------------------------------------------------------------
 
+      --[[------------------------------------------------------------------------]]--
+      local tb_region = R2R.ConfigDialog
+      local tb_pAnchor = READI.ANCHOR_TOPLEFT
+      local tb_offsetX = infoWidth + 20
+      local tb_offsetY = -72
+
+      if R2R.config[configKeys[i-1]] and R2R.config[configKeys[i-1]].tabButton then
+        tb_region = R2R.config[configKeys[i-1]].tabButton
+        tb_pAnchor = READI.ANCHOR_TOPRIGHT
+        tb_offsetX = 10
+        tb_offsetY = 0
+        else
+      end
+      local tabBtnSettings = {
+        name = data.prefix .. RD.Helper.string:Capitalize(key).."TabButton",
+        region = tb_region,
+        label = s_titleText,
+        onClick = function()
+          for i=2, #configKeys do
+            if R2R.config[configKeys[i]] and R2R.config[configKeys[i]].container then
+              R2R.config[configKeys[i]].container:Hide()
+            end
+          end
+          R2R.config[key].container:Show()
+        end,
+        anchor = READI.ANCHOR_TOPLEFT,
+        parent = tb_region,
+        p_anchor = tb_pAnchor,
+        offsetX = tb_offsetX,
+        offsetY = tb_offsetY,
+      }
+      if key ~= "info" then
+        R2R.config[key].tabButton = R2R.config[key].tabButton or RD:Button(data, tabBtnSettings)
+      end
+      --[[------------------------------------------------------------------------]]--
       R2R.config[key].container, R2R.config[key].anchorline = READI:OptionsContainer(data, {
         name = panelName,
         parent = R2R.ConfigDialog,
@@ -156,21 +203,21 @@ function R2R:SetupConfig()
           offsetY = r_offsetY,
         },
         title = {
-          text = titleText,
+          text = c_titleText,
           color = "r2r",
-        }
+        },
       })
 
       R2R.settings[key].panel, R2R.settings[key].container, R2R.settings[key].anchorline = READI:OptionPanel(data, {
         name = panelName,
         parent = parentPanel,
         title = {
-          text = titleText,
+          text = s_titleText,
           color = "r2r",
-        }
+        },
       })
 
-      --------------------------------------------------------------------------------
+      --[[------------------------------------------------------------------------]]--
       if Settings and Settings.RegisterCanvasLayoutCategory then
         if parentPanel then
           local category = Settings.GetCategory(parentPanel)
@@ -204,7 +251,6 @@ function R2R:UpdateOptions(shuffle)
     shuffle = true
   end
   R2R.Anchoring:Update()
-  -- R2R.Bindings:Update()
 
   R2R.SkyButton:ScaleButton()
   R2R.SkyButton:SetPosition()

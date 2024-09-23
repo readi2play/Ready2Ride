@@ -150,14 +150,8 @@ function R2R:GetFilteredListOfMounts(filter, ...)
   return mounts
 end
 
-function R2R:GetMountID()
-  -- if #R2R.ActiveKeys > 0 then
-  --   local key = table.concat(READI.Helper.table:Filter(R2R.ActiveKeys, function(v) return v ~= nil end), "+")
-  --   if R2R.db.bindings.keys[key] then
-  --     return R2R.db.bindings.keys[key]
-  --   end
-  -- end
 
+function R2R:GetMountID()
   if IsSubmerged() then
     local hasAbility = R2R.db.bindings.swimming.ability ~= ""
     if hasAbility then
@@ -167,17 +161,50 @@ function R2R:GetMountID()
     end
   end
 
-  R2R.Zone = C_Map.GetBestMapForUnit("player")
-  local zoneID = tostring(R2R.Zone)
-  R2R.ContinentID = tostring(R2R:GetContinent(R2R.Zone).mapID)
+  R2R.ZoneID = C_Map.GetBestMapForUnit("player")
+  R2R.ContinentID = R2R:GetContinent(R2R.ZoneID).mapID
+
+  local currentContinent = RD.Helper.table:Filter(R2R.db.continents, function(c) return c.zoneID == R2R.ContinentID end)[1]
+  local currentZone = RD.Helper.table:Filter(currentContinent.zones, function(z) return z.zoneID == R2R.ZoneID end)[1]
+  if currentContinent.hasZones and currentContinent.useZones and currentZone then
+    if currentZone.mountID ~= "" then
+      return currentZone.mountID
+    else
+      return currentContinent.mountID
+    end
+  end
+  return currentContinent.mountID
+end
+
+
+-- function R2R:GetMountID()
+--   -- if #R2R.ActiveKeys > 0 then
+--   --   local key = table.concat(READI.Helper.table:Filter(R2R.ActiveKeys, function(v) return v ~= nil end), "+")
+--   --   if R2R.db.bindings.keys[key] then
+--   --     return R2R.db.bindings.keys[key]
+--   --   end
+--   -- end
+
+--   if IsSubmerged() then
+--     local hasAbility = R2R.db.bindings.swimming.ability ~= ""
+--     if hasAbility then
+--       return R2R.db.bindings.swimming.ability
+--     else
+--       return R2R.db.bindings.swimming.mount
+--     end
+--   end
+
+--   R2R.Zone = C_Map.GetBestMapForUnit("player")
+--   local zoneID = tostring(R2R.Zone)
+--   R2R.ContinentID = tostring(R2R:GetContinent(R2R.Zone).mapID)
 
   
-  if R2R.db.continents[R2R.ContinentID].hasZones and R2R.db.continents[R2R.ContinentID].useZones and R2R.db.continents[R2R.ContinentID].zones[zoneID] then
-    return R2R.db.continents[R2R.ContinentID].zones[zoneID].mountID or R2R.db.continents[R2R.ContinentID].mountID
-  end
+--   if R2R.db.continents[R2R.ContinentID].hasZones and R2R.db.continents[R2R.ContinentID].useZones and R2R.db.continents[R2R.ContinentID].zones[zoneID] then
+--     return R2R.db.continents[R2R.ContinentID].zones[zoneID].mountID or R2R.db.continents[R2R.ContinentID].mountID
+--   end
 
-  return R2R.db.continents[R2R.ContinentID].mountID
-end
+--   return R2R.db.continents[R2R.ContinentID].mountID
+-- end
 
 function R2R:GetMount(id)
   if not id then return nil, nil, nil end
@@ -230,8 +257,10 @@ function R2R:InitializeDB ()
   READI.Helper.table:CleanUp(R2R.defaults, R2R.db, "assigned_profile")
 end
 --[[------------------------------------------------------------------------]]--
-_G[AddonName .. '_Options'] = function()
-  Settings.OpenToCategory(AddonName)
+_G[AddonName .. '_Options'] = function(key)
+  _G[R2R.data.prefix .. RD.Helper.string:Capitalize(key).."TabButton"]:Click()
+  R2R.ConfigDialog:Show()
+  -- Settings.OpenToCategory(AddonName)
 end
 -- enable the addon, this is defined in classic/modern
 if type(r2r.Enable) == "function" then R2R:Enable() end
@@ -241,26 +270,14 @@ if type(r2r.Enable) == "function" then R2R:Enable() end
 ----------------------------------------------------------------------------]]--
 SLASH_R2R1 = "/sky"
 
-local function InfoCommandHandler()
-  
-
-  print([=[ 
-    |cFFD4AA00Config:|r
-      |cFFFFE680/sky|r config
-    |cFFD4AA00Help:|r
-      |cFFFFE680/sky|r help
-  ]=])
-end
 -- define the corresponding slash command handlers
 SlashCmdList.R2R = function(msg, editBox)
   msg = string.lower(msg)
-  local infoKeywords = {"help"}
-  local configKeywords = {"config"}
+  local configKeywords = {"mounts", "specials", "anchoring", "profiles"}
   if READI.Helper.table:Contains(msg, configKeywords) then
-    _G[AddonName .. '_Options']()
-  elseif READI.Helper.table:Contains(msg, infoKeywords) then
-    InfoCommandHandler()
+    _G[AddonName .. '_Options'](msg)
   else
+    R2R.ConfigDialog:Clear()
     R2R.ConfigDialog:Show()
   end
 end

@@ -20,447 +20,959 @@ R2R.defaults = {
     },
   },
   continents = {
-    ["407"] = { -- Darkmoon Island
+    { -- Darkmoon Island
+      zoneID = 407,
       hasZones = false,
       useZones = false,
       mountID = 1792,
     },
-    ["12"] = { -- Kalimdor
+    { -- Kalimdor
+      zoneID = 12,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Ashenvale
-        ["63"] = { mountID = nil },
+        {
+          zoneID = 63,
+          mountID = ""
+        },
         -- Azshara
-        ["76"] = { mountID = nil },
+        {
+          zoneID = 76,
+          mountID = ""
+        },
         -- Azuremyst Isle
-        ["97"] = { mountID = nil },
+        {
+          zoneID = 97,
+          mountID = ""
+        },
         -- Bloodmyst Isle
-        ["106"] = { mountID = nil },
+        {
+          zoneID = 106,
+          mountID = ""
+        },
         -- Darkshore
-        ["62"] = { mountID = nil },
+        {
+          zoneID = 62,
+          mountID = ""
+        },
         -- Darnassus
-        ["89"] = { mountID = nil },
+        {
+          zoneID = 89,
+          mountID = ""
+        },
         -- Desolace
-        ["66"] = { mountID = nil },
+        {
+          zoneID = 66,
+          mountID = ""
+        },
         -- Durotar
-        ["1"] = { mountID = nil },
+        {
+          zoneID = 1,
+          mountID = ""
+        },
         -- Dustwallow Marsh
-        ["70"] = { mountID = nil },
+        {
+          zoneID = 70,
+          mountID = ""
+        },
         -- Echo Isles
-        ["463"] = { mountID = nil },
+        {
+          zoneID = 463,
+          mountID = ""
+        },
         -- Felwood
-        ["77"] = { mountID = nil },
+        {
+          zoneID = 77,
+          mountID = ""
+        },
         -- Feralas
-        ["69"] = { mountID = nil },
+        {
+          zoneID = 69,
+          mountID = ""
+        },
         -- Moonglade
-        ["80"] = { mountID = nil },
+        {
+          zoneID = 80,
+          mountID = ""
+        },
         -- Mount Hyjal
-        ["198"] = { mountID = nil },
+        {
+          zoneID = 198,
+          mountID = ""
+        },
         -- Mulgore
-        ["7"] = { mountID = nil },
+        {
+          zoneID = 7,
+          mountID = ""
+        },
         -- Northern Barrens
-        ["10"] = { mountID = nil },
+        {
+          zoneID = 10,
+          mountID = ""
+        },
         -- Orgrimmar
-        ["85"] = { mountID = nil },
+        {
+          zoneID = 85,
+          mountID = ""
+        },
         -- Orgrimmar Cleft of Shadow
-        ["86"] = { mountID = nil },
+        {
+          zoneID = 86,
+          mountID = ""
+        },
         -- Silithus
-        ["81"] = { mountID = nil },
+        {
+          zoneID = 81,
+          mountID = ""
+        },
         -- Southern Barrens
-        ["199"] = { mountID = nil },
+        {
+          zoneID = 199,
+          mountID = ""
+        },
         -- Stonetalon Mountains
-        ["65"] = { mountID = nil },
+        {
+          zoneID = 65,
+          mountID = ""
+        },
         -- Tanaris
-        ["71"] = { mountID = nil },
+        {
+          zoneID = 71,
+          mountID = ""
+        },
         -- Teldrassil
-        ["57"] = { mountID = nil },
+        {
+          zoneID = 57,
+          mountID = ""
+        },
         -- The Exodar
-        ["103"] = { mountID = nil },
+        {
+          zoneID = 103,
+          mountID = ""
+        },
         -- Thunder Bluff
-        ["88"] = { mountID = nil },
+        {
+          zoneID = 88,
+          mountID = ""
+        },
         -- Thousand Needles
-        ["64"] = { mountID = nil },
+        {
+          zoneID = 64,
+          mountID = ""
+        },
         -- Uldum
-        ["249"] = { mountID = nil },
+        {
+          zoneID = 249,
+          mountID = ""
+        },
         -- Un'Goro Crater
-        ["78"] = { mountID = nil },
+        {
+          zoneID = 78,
+          mountID = ""
+        },
         -- Winterspring
-        ["83"] = { mountID = nil },
+        {
+          zoneID = 83,
+          mountID = ""
+        },
       }
     },
-    ["13"] = { -- Eastern Kingdoms
+    { -- Eastern Kingdoms
+      zoneID = 13,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Abyssal Depths
-        ["204"] = { mountID = nil },
+        {
+          zoneID = 204,
+          mountID = ""
+        },
         -- Arathi Highlands
-        ["14"] = { mountID = nil },
+        {
+          zoneID = 14,
+          mountID = ""
+        },
         -- Badlands
-        ["15"] = { mountID = nil },
+        {
+          zoneID = 15,
+          mountID = ""
+        },
         -- Blackrock Mountain
-        ["33"] = { mountID = nil },
+        {
+          zoneID = 33,
+          mountID = ""
+        },
         -- Blasted Lands
-        ["17"] = { mountID = nil },
+        {
+          zoneID = 17,
+          mountID = ""
+        },
         -- Burning Steppes
-        ["36"] = { mountID = nil },
+        {
+          zoneID = 36,
+          mountID = ""
+        },
         -- Cape of Strangethorn
-        ["210"] = { mountID = nil },
+        {
+          zoneID = 210,
+          mountID = ""
+        },
         -- Deadwind Pass
-        ["42"] = { mountID = nil },
+        {
+          zoneID = 42,
+          mountID = ""
+        },
         -- Deeprun Tram
-        ["499"] = { mountID = nil },
+        {
+          zoneID = 499,
+          mountID = ""
+        },
         -- Dun Morogh
-        ["29"] = { mountID = nil },
+        {
+          zoneID = 29,
+          mountID = ""
+        },
         -- Duskwood
-        ["47"] = { mountID = nil },
+        {
+          zoneID = 47,
+          mountID = ""
+        },
         -- Eastern Plaguelands
-        ["23"] = { mountID = nil },
+        {
+          zoneID = 23,
+          mountID = ""
+        },
         -- Elwynn Forest
-        ["37"] = { mountID = nil },
+        {
+          zoneID = 37,
+          mountID = ""
+        },
         -- Eversong Woods
-        ["94"] = { mountID = nil },
+        {
+          zoneID = 94,
+          mountID = ""
+        },
         -- Ghostlands
-        ["95"] = { mountID = nil },
+        {
+          zoneID = 95,
+          mountID = ""
+        },
         -- Hillsbrad Foothills
-        ["25"] = { mountID = nil },
+        {
+          zoneID = 25,
+          mountID = ""
+        },
         -- Ironforge
-        ["87"] = { mountID = nil },
+        {
+          zoneID = 87,
+          mountID = ""
+        },
         -- Isle of Quel'Danas
-        ["122"] = { mountID = nil },
+        {
+          zoneID = 122,
+          mountID = ""
+        },
         -- Kelp'thar Forest
-        ["201"] = { mountID = nil },
+        {
+          zoneID = 201,
+          mountID = ""
+        },
         -- Loch Modan
-        ["48"] = { mountID = nil },
+        {
+          zoneID = 48,
+          mountID = ""
+        },
         -- Northern Stranglethorn
-        ["50"] = { mountID = nil },
+        {
+          zoneID = 50,
+          mountID = ""
+        },
         -- Redridge Mountains
-        ["49"] = { mountID = nil },
+        {
+          zoneID = 49,
+          mountID = ""
+        },
         -- Ruins of Gilneas
-        ["217"] = { mountID = nil },
+        {
+          zoneID = 217,
+          mountID = ""
+        },
         -- Searing Gorge
-        ["32"] = { mountID = nil },
+        {
+          zoneID = 32,
+          mountID = ""
+        },
         -- Shimmering Expanse
-        ["205"] = { mountID = nil },
+        {
+          zoneID = 205,
+          mountID = ""
+        },
         -- Silvermoon City
-        ["110"] = { mountID = nil },
+        {
+          zoneID = 110,
+          mountID = ""
+        },
         -- Silverpine Forest
-        ["21"] = { mountID = nil },
+        {
+          zoneID = 21,
+          mountID = ""
+        },
         -- Stormwind City
-        ["84"] = { mountID = nil },
+        {
+          zoneID = 84,
+          mountID = ""
+        },
         -- Swamp of Sorrows
-        ["51"] = { mountID = nil },
+        {
+          zoneID = 51,
+          mountID = ""
+        },
         -- The Hinterlands
-        ["26"] = { mountID = nil },
+        {
+          zoneID = 26,
+          mountID = ""
+        },
         -- Tirisfal Glades
-        ["18"] = { mountID = nil },
+        {
+          zoneID = 18,
+          mountID = ""
+        },
         -- Tol Barad
-        ["245"] = { mountID = nil },
+        {
+          zoneID = 245,
+          mountID = ""
+        },
         -- Twilight Highlands
-        ["241"] = { mountID = nil },
+        {
+          zoneID = 241,
+          mountID = ""
+        },
         -- Undercity
-        ["90"] = { mountID = nil },
+        {
+          zoneID = 90,
+          mountID = ""
+        },
         -- Vashj"ir: Kelp'thar Forest
-        ["201"] = { mountID = nil },
+        {
+          zoneID = 201,
+          mountID = ""
+        },
         -- Vashj"ir: Shimmering Expanse
-        ["205"] = { mountID = nil },
+        {
+          zoneID = 205,
+          mountID = ""
+        },
         -- Vashj"ir: Abyssal Depths
-        ["204"] = { mountID = nil },
+        {
+          zoneID = 204,
+          mountID = ""
+        },
         -- Western Plaguelands
-        ["22"] = { mountID = nil },
+        {
+          zoneID = 22,
+          mountID = ""
+        },
         -- Westfall
-        ["52"] = { mountID = nil },
+        {
+          zoneID = 52,
+          mountID = ""
+        },
         -- Wetlands
-        ["56"] = { mountID = nil },
+        {
+          zoneID = 56,
+          mountID = ""
+        },
       }
     },
-    ["101"] = { -- Outland
+    { -- Outland
+      zoneID = 101,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Blades Edge Mountains
-        ["105"] = { mountID = nil },
+        {
+          zoneID = 105,
+          mountID = ""
+        },
         -- Hellfire Penninsula
-        ["100"] = { mountID = nil },
+        {
+          zoneID = 100,
+          mountID = ""
+        },
         -- Nagrand
-        ["107"] = { mountID = nil },
+        {
+          zoneID = 107,
+          mountID = ""
+        },
         -- Netherstorm
-        ["109"] = { mountID = nil },
+        {
+          zoneID = 109,
+          mountID = ""
+        },
         -- Shadowmoon Valley
-        ["104"] = { mountID = nil },
+        {
+          zoneID = 104,
+          mountID = ""
+        },
         -- Terrokkar Forest
-        ["108"] = { mountID = nil },
+        {
+          zoneID = 108,
+          mountID = ""
+        },
         -- Zangermarsh
-        ["102"] = { mountID = nil },
+        {
+          zoneID = 102,
+          mountID = ""
+        },
         -- Shattrath
-        ["111"] = { mountID = nil },
+        {
+          zoneID = 111,
+          mountID = ""
+        },
       }
     },
-    ["113"] = { -- Northrend
+    { -- Northrend
+      zoneID = 113,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Borean Tundra
-        ["114"] = { mountID = nil},
+        {
+          zoneID = 114,
+          mountID = ""
+        },
         -- Crystalsong Forest
-        ["127"] = { mountID = nil},
+        {
+          zoneID = 127,
+          mountID = ""
+        },
         -- Dalaran
-        ["125"] = { mountID = nil},
+        {
+          zoneID = 125,
+          mountID = ""
+        },
         -- Dalaran Underbelly
-        ["126"] = { mountID = nil},
+        {
+          zoneID = 126,
+          mountID = ""
+        },
         -- Dragonblight
-        ["115"] = { mountID = nil},
+        {
+          zoneID = 115,
+          mountID = ""
+        },
         -- Grizzly Hills
-        ["116"] = { mountID = nil},
+        {
+          zoneID = 116,
+          mountID = ""
+        },
         -- Howling Fjord
-        ["117"] = { mountID = nil},
+        {
+          zoneID = 117,
+          mountID = ""
+        },
         -- Icecrown
-        ["118"] = { mountID = nil},
+        {
+          zoneID = 118,
+          mountID = ""
+        },
         -- Sholazar Basin
-        ["119"] = { mountID = nil},
+        {
+          zoneID = 119,
+          mountID = ""
+        },
         -- The Storm Peaks
-        ["120"] = { mountID = nil},
+        {
+          zoneID = 120,
+          mountID = ""
+        },
         -- Wintergrasp
-        ["123"] = { mountID = nil},
+        {
+          zoneID = 123,
+          mountID = ""
+        },
         -- Zul' Drak
-        ["121"] = { mountID = nil},
+        {
+          zoneID = 121,
+          mountID = ""
+        },
       }
     },
-    ["947"] = { -- Azeroth (Cataclysm)
+    { -- Azeroth (Cataclysm)
+      zoneID = 947,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Maelstrom
-        ["948"] = { mountID = nil },
+        {
+          zoneID = 948,
+          mountID = ""
+        },
         -- Deepholm
-        ["207"] = { mountID = nil },
+        {
+          zoneID = 207,
+          mountID = ""
+        },
       }
     },
-    ["424"] = { -- Pandaria
+    { -- Pandaria
+      zoneID = 424,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Dread Wastes
-        ["422"] = { mountID = nil },
+        {
+          zoneID = 422,
+          mountID = ""
+        },
         -- Isle of Thunder
-        ["504"] = { mountID = nil },
+        {
+          zoneID = 504,
+          mountID = ""
+        },
         -- Karasarang Wilds
-        ["418"] = { mountID = nil },
+        {
+          zoneID = 418,
+          mountID = ""
+        },
         -- Kun-Lai Summit
-        ["379"] = { mountID = nil },
+        {
+          zoneID = 379,
+          mountID = ""
+        },
         -- Shrine of the Seven Stars
-        ["390"] = { mountID = nil },
+        {
+          zoneID = 390,
+          mountID = ""
+        },
         -- Shrine of Two Moons
-        ["392"] = { mountID = nil },
+        {
+          zoneID = 392,
+          mountID = ""
+        },
         -- The Jade Forest
-        ["371"] = { mountID = nil },
+        {
+          zoneID = 371,
+          mountID = ""
+        },
         -- The Veiled Stair
-        ["433"] = { mountID = nil },
+        {
+          zoneID = 433,
+          mountID = ""
+        },
         -- Timeless Isle
-        ["554"] = { mountID = nil },
+        {
+          zoneID = 554,
+          mountID = ""
+        },
         -- Townlong Steppes
-        ["388"] = { mountID = nil },
+        {
+          zoneID = 388,
+          mountID = ""
+        },
         -- Vale of Eternal Blossoms
-        ["390"] = { mountID = nil },
+        {
+          zoneID = 390,
+          mountID = ""
+        },
         -- Valley of the Four Winds
-        ["376"] = { mountID = nil },
+        {
+          zoneID = 376,
+          mountID = ""
+        },
       }
     },
-    ["572"] = { -- Draenor
+    { -- Draenor
+      zoneID = 572,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Ashran
-        ["588"] = { mountID = nil},
+        {
+          zoneID = 588,
+          mountID = ""
+        },
         -- Frostfire Ridge
-        ["525"] = { mountID = nil},
+        {
+          zoneID = 525,
+          mountID = ""
+        },
         -- Gorgrond
-        ["543"] = { mountID = nil},
+        {
+          zoneID = 543,
+          mountID = ""
+        },
         -- Nagrand
-        ["550"] = { mountID = nil},
+        {
+          zoneID = 550,
+          mountID = ""
+        },
         -- Shadowmoon Valley
-        ["539"] = { mountID = nil},
+        {
+          zoneID = 539,
+          mountID = ""
+        },
         -- Spires of Arak
-        ["542"] = { mountID = nil},
+        {
+          zoneID = 542,
+          mountID = ""
+        },
         -- Talador
-        ["535"] = { mountID = nil},
+        {
+          zoneID = 535,
+          mountID = ""
+        },
         -- Tanaan Jungle
-        ["534"] = { mountID = nil},
+        {
+          zoneID = 534,
+          mountID = ""
+        },
         -- Warspear
-        ["624"] = { mountID = nil},
+        {
+          zoneID = 624,
+          mountID = ""
+        },
         -- Garrison
-        ["590"] = { mountID = nil},
+        {
+          zoneID = 590,
+          mountID = ""
+        },
       }
     },
-    ["619"] = { -- The Broken Isles
+    { -- The Broken Isles
+      zoneID = 619,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Azsuna
-        ["630"] = { mountID = nil },
+        {
+          zoneID = 630,
+          mountID = ""
+        },
         -- Dalaran
-        ["627"] = { mountID = nil },
+        {
+          zoneID = 627,
+          mountID = ""
+        },
         -- Dalaran Underbelly
-        ["628"] = { mountID = nil },
+        {
+          zoneID = 628,
+          mountID = ""
+        },
         -- Eye of Azshara
-        ["790"] = { mountID = nil },
+        {
+          zoneID = 790,
+          mountID = ""
+        },
         -- Helheim
-        ["649"] = { mountID = nil },
+        {
+          zoneID = 649,
+          mountID = ""
+        },
         -- Highmountain
-        ["650"] = { mountID = nil },
+        {
+          zoneID = 650,
+          mountID = ""
+        },
         -- Stormheim
-        ["634"] = { mountID = nil },
+        {
+          zoneID = 634,
+          mountID = ""
+        },
         -- Suramar
-        ["680"] = { mountID = nil },
+        {
+          zoneID = 680,
+          mountID = ""
+        },
         -- The Broken Shore
-        ["646"] = { mountID = nil },
+        {
+          zoneID = 646,
+          mountID = ""
+        },
         -- Thundertotem (indoors)
-        ["652"] = { mountID = nil },
+        {
+          zoneID = 652,
+          mountID = ""
+        },
         -- Thundertotem (outdoors)
-        ["750"] = { mountID = nil },
+        {
+          zoneID = 750,
+          mountID = ""
+        },
         -- Val'sharah
-        ["641"] = { mountID = nil },
+        {
+          zoneID = 641,
+          mountID = ""
+        },
         -- Val'sharah Dreamgrove
-        ["747"] = { mountID = nil },
+        {
+          zoneID = 747,
+          mountID = ""
+        },
         -- Val'sharah Emerald Dreamway
-        ["715"] = { mountID = nil },
+        {
+          zoneID = 715,
+          mountID = ""
+        },
       }
     },
-    ["905"] = { -- Argus
+    { -- Argus
+      zoneID = 905,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Argus: Antoran Wastes
-        ["885"] = { mountID = nil },
+        {
+          zoneID = 885,
+          mountID = ""
+        },
         -- Argus: Eredath
-        ["882"] = { mountID = nil },
+        {
+          zoneID = 882,
+          mountID = ""
+        },
         -- Argus: Krokuun
-        ["830"] = { mountID = nil },
+        {
+          zoneID = 830,
+          mountID = ""
+        },
         -- Argus: The Vindicaar
-        ["831"] = { mountID = nil },
+        {
+          zoneID = 831,
+          mountID = ""
+        },
       }
     },
-    ["875"] = { -- Zandalar
+    { -- Zandalar
+      zoneID = 875,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Dazaralor
-        ["1165"] = { mountID = nil },
+        {
+          zoneID = 1165,
+          mountID = ""
+        },
         -- Dazaralor The Great Seal
-        ["1163"] = { mountID = nil },
+        {
+          zoneID = 1163,
+          mountID = ""
+        },
         -- Nazmir
-        ["863"] = { mountID = nil },
+        {
+          zoneID = 863,
+          mountID = ""
+        },
         -- Vol'dun
-        ["864"] = { mountID = nil },
+        {
+          zoneID = 864,
+          mountID = ""
+        },
         -- Zuldazar
-        ["862"] = { mountID = nil },
+        {
+          zoneID = 862,
+          mountID = ""
+        },
       }
     },
-    ["876"] = { -- Kul-Tiras
+    { -- Kul-Tiras
+      zoneID = 876,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Boralus
-        ["1161"] = { mountID = nil },
+        {
+          zoneID = 1161,
+          mountID = ""
+        },
         -- Drustvar
-        ["896"] = { mountID = nil },
+        {
+          zoneID = 896,
+          mountID = ""
+        },
         -- Stormsong Valley
-        ["942"] = { mountID = nil },
+        {
+          zoneID = 942,
+          mountID = ""
+        },
         -- Tiragarde Sound
-        ["895"] = { mountID = nil },
+        {
+          zoneID = 895,
+          mountID = ""
+        },
       }
     },
-    ["1355"] = { -- Nazjatar
+    { -- Nazjatar
+      zoneID = 1355,
       hasZones = false,
       useZones = false,
       mountID = 1792,
     },
-    ["1462"] = { -- Mechagon
+    { -- Mechagon
+      zoneID = 1462,
       hasZones = false,
       useZones = false,
       mountID = 1792,
     },
-    ["1550"] = { -- Shadowlands
+    { -- Shadowlands
+      zoneID = 1550,
       hasZones = true,
       useZones = false,
       mountID = 1792,
       zones = {
         -- Ardenweald
-        ["1565"] = { mountID = nil },
+        {
+          zoneID = 1565,
+          mountID = ""
+        },
         -- Bastion
-        ["1533"] = { mountID = nil },
+        {
+          zoneID = 1533,
+          mountID = ""
+        },
         -- Maldraxxus
-        ["1536"] = { mountID = nil },
+        {
+          zoneID = 1536,
+          mountID = ""
+        },
         -- Revendreth
-        ["1525"] = { mountID = nil },
+        {
+          zoneID = 1525,
+          mountID = ""
+        },
         -- Oribos main quest floor
-        ["1670"] = { mountID = nil },
+        {
+          zoneID = 1670,
+          mountID = ""
+        },
         -- Oribos FP & Portals level
-        ["1671"] = { mountID = nil },
+        {
+          zoneID = 1671,
+          mountID = ""
+        },
         -- Korthia
-        ["1961"] = { mountID = nil },
+        {
+          zoneID = 1961,
+          mountID = ""
+        },
         -- The Maw
-        ["1543"] = { mountID = nil },
+        {
+          zoneID = 1543,
+          mountID = ""
+        },
         -- Zereth Mortis
-        ["1970"] = { mountID = nil },
+        {
+          zoneID = 1970,
+          mountID = ""
+        },
       }
     },
-    ["1978"] = { -- Dragon Isles
+    { -- Dragon Isles
+      zoneID = 1978,
       hasZones = true,
       useZones = true,
       mountID = 1589,
       zones = {
         -- The Waking Shores
-        ["2022"] = { mountID = 1589 },
+        {
+          zoneID = 2022,
+          mountID = 1589
+        },
         -- Ohn'ahra Plains
-        ["2023"] = { mountID = 1590 },
+        {
+          zoneID = 2023,
+          mountID = 1590
+        },
         -- Azure Span
-        ["2024"] = { mountID = 1563 },
+        {
+          zoneID = 2024,
+          mountID = 1563
+        },
         -- Thaldraszus
-        ["2025"] = { mountID = 1591 },
+        {
+          zoneID = 2025,
+          mountID = 1591
+        },
         -- Valdrakken
-        ["2112"] = { mountID = 1591 },
+        {
+          zoneID = 2112,
+          mountID = 1591
+        },
         -- Forbidden Reach
-        ["2151"] = { mountID = 1589 },
+        {
+          zoneID = 2151,
+          mountID = 1589
+        },
         -- Zaralek Cavern
-        ["2133"] = { mountID = 1589 },
+        {
+          zoneID = 2133,
+          mountID = 1589
+        },
         -- Emerald Dream
-        ["2200"] = { mountID = 1589 },
+        {
+          zoneID = 2200,
+          mountID = 1589
+        },
       }
     },
-    ["2274"] = { -- Khaz Algar
+    { -- Khaz Algar
+      zoneID = 2274,
       hasZones = true,
       useZones = true,
       mountID = 1792,
       zones = {
          -- Dornogal
-        ["2339"] = { mountID = nil },
+        {
+          zoneID = 2339,
+          mountID = ""
+        },
          -- Isle of Dorn
-        ["2248"] = { mountID = nil },
+        {
+          zoneID = 2248,
+          mountID = ""
+        },
          -- The Ringing Deeps
-        ["2214"] = { mountID = 2144 },
+        {
+          zoneID = 2214,
+          mountID = 2144
+        },
          -- Hallowfall
-        ["2215"] = { mountID = 1051 },
+        {
+          zoneID = 2215,
+          mountID = 1051
+        },
          -- Azj-Kahet
-        ["2255"] = { mountID = 2181 },
+        {
+          zoneID = 2255,
+          mountID = 2181
+        },
          -- Azj-Kahet Lower Levels
-        ["2256"] = { mountID = 2181 },
+        {
+          zoneID = 2256,
+          mountID = 2181
+        },
          -- City of Threads Umbral Bazaar
-        ["2213"] = { mountID = 2181 },
+        {
+          zoneID = 2213,
+          mountID = 2181
+        },
          -- City of Threads Lower Levels
-        ["2216"] = { mountID = 2181 },
+        {
+          zoneID = 2216,
+          mountID = 2181
+        },
       }
     }
   }

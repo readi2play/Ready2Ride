@@ -23,9 +23,10 @@ R2R.Specials = R2R.Specials or {
 OPTIONS PANEL CREATION
 ----------------------------------------------------------------------------]]--
 function R2R:FillSpecialsPanel(panel, container, anchorline)
+  local namingPrefix = "SettingsPanel"
   if panel == R2R.ConfigDialog then
     r2r.windowWidth = ceil(container:GetWidth() - 20)
-    return
+    namingPrefix = panel:GetName()
   else
     r2r.windowWidth = SettingsPanel.Container:GetWidth()
   end
@@ -55,7 +56,7 @@ function R2R:FillSpecialsPanel(panel, container, anchorline)
   create the font strings, define their formatting and set text
   ----------------------------------------------------------------------------]]--
   local swimming_sectionTitle = container:CreateFontString(READI.ARTWORK, nil, "GameFontHighlightLarge")
-  swimming_sectionTitle:SetPoint(READI.ANCHOR_TOPLEFT, anchorline, 0, -20)
+  swimming_sectionTitle:SetPoint(READI.ANCHOR_TOPLEFT, anchorline, 20, -20)
   swimming_sectionTitle:SetText(READI.Helper.color:Get("r2r", R2R.Colors, R2R.Specials.swimming.label))
   swimming_sectionTitle:SetJustifyH("LEFT")
   swimming_sectionTitle:SetWidth(r2r.columnWidth)
@@ -89,7 +90,7 @@ function R2R:FillSpecialsPanel(panel, container, anchorline)
     values = R2R:GetFilteredListOfMounts(READI.MOUNT_TYPE_AQUATIC),
     storage = "R2R.db.bindings.swimming",
     option = "mount",
-    name = AddonName.."Dropdown_swimming",
+    name = format("%s%sDropdown_swimming", namingPrefix, AddonName),
     region = container,
     width = r2r.columnWidth - 20,
     parent = swimming_sectionSubTitle,
@@ -110,14 +111,16 @@ function R2R:FillSpecialsPanel(panel, container, anchorline)
 
   local swimmingPreset = ""
   if isSwimmingAbility then swimmingPreset = C_Spell.GetSpellInfo(R2R.db.bindings.swimming.ability).name end
+  local swimmingName = format("%s_%sSwimmingAbility_%d", data.prefix, namingPrefix, mapID)
   R2R.Specials.swimming.editBox = READI:EditBox(data, {
+    name = swimmingName,
     region = container,
     type = "text",
     value = swimmingPreset,
-    width = r2r.columnWidth,
+    width = r2r.columnWidth - 10,
     parent = R2R.Specials.swimming.dropdown,
     showButtons = true,
-    offsetX = 20,
+    offsetX = 25,
     validity = READI.Helper.color:Get("error", nil, R2R.L["Invalid |cFFFFE680SpellID|r or |cFFFFE680spell name|r. Please check your input and try again."]),
     onChange = function()
       if R2R.Specials.swimming.editBox:GetText() == "0" then
@@ -166,13 +169,17 @@ function R2R:FillSpecialsPanel(panel, container, anchorline)
   })
   local indoorsPreset = ""
   if isIndoorsAbility then indoorsPreset = C_Spell.GetSpellInfo(R2R.db.bindings.indoors).name end
+  local noMountName = format("%s_%snoMountAbility_%d", data.prefix, namingPrefix, mapID)
   R2R.Specials.noMountArea.editBox = READI:EditBox(data, {
+    name = noMountName,
     region = container,
     type = "text",
     value = indoorsPreset,
-    width = r2r.columnWidth,
-    parent = noMountArea_sectionSubTitle,
-    offsetY = -8,
+    width = r2r.columnWidth - 10,
+    parent = R2R.Specials.swimming.dropdown,
+    offsetX = 15,
+    offsetY = 2,
+    p_anchor = READI.ANCHOR_TOPRIGHT,
     showButtons = true,
     validity = READI.Helper.color:Get("error", nil, R2R.L["Invalid |cFFFFE680SpellID|r or |cFFFFE680spell name|r. Please check your input and try again."]),
     onChange = function()
@@ -221,14 +228,22 @@ function R2R:FillSpecialsPanel(panel, container, anchorline)
   --[[----------------------------------------------------------------------------
   create buttons
   ----------------------------------------------------------------------------]]--
+  local btnRegion
+  if panel == R2R.ConfigDialog then
+    btnRegion = container
+  else
+    btnRegion = panel
+  end
+
   local btn_Reset = READI:Button(data,
     {
-      name = AddonName..READI.Helper.string:Capitalize(data.keyword).."ResetButton",
-      region = panel,
+      name = format("%s%sResetButton", namingPrefix, AddonName..READI.Helper.string:Capitalize(data.keyword)),
+      region = btnRegion,
       label = READI:l10n("general.labels.buttons.reset"),
       anchor = READI.ANCHOR_BOTTOMLEFT,
-      parent = panel,
-      offsetY = 20,
+      parent = btnRegion,
+      offsetX = 10,
+      offsetY = 10,
       onClick = function()
         R2R.db[data.keyword] = CopyTable(R2R.defaults[data.keyword])
         EventRegistry:TriggerEvent(format("%s.%s.%s", data.prefix, string.upper(data.keyword), "OnReset"))

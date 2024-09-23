@@ -122,11 +122,11 @@ R2R.Profile = R2R.Profile or {
       local prompt = _G[promptName] or READI:Dialog(data, {
         name = promptName,
         title = READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Delete Profile"]),
-        icon = {
-          texture = GetAddOnMetadata(AddonName, "IconTexture"),
-          height = 42,
-          width = 42,
-        },
+        -- icon = {
+        --   texture = GetAddOnMetadata(AddonName, "IconTexture"),
+        --   height = 42,
+        --   width = 42,
+        -- },
         buttonSet = {
           {
             key = "cancel",
@@ -171,9 +171,13 @@ R2R.Profile = R2R.Profile or {
             end
           }
         },
+        level = 900,
         allowKeyboard = true,
         closeOnEsc = true,
         createHidden = false,
+        closeXButton = {
+          hidden = true,
+        },
         onClose = function()
           Profiler.deleteProfile.dropdown:SetValue(nil)
         end
@@ -186,9 +190,10 @@ R2R.Profile = R2R.Profile or {
   end,
 }
 function R2R:FillProfilesPanel(panel, container, anchorline)
+  local namingPrefix = "SettingsPanel"
   if panel == R2R.ConfigDialog then
     r2r.windowWidth = ceil(container:GetWidth() - 20)
-    return
+    namingPrefix = panel:GetName()
   else
     r2r.windowWidth = SettingsPanel.Container:GetWidth()
   end
@@ -200,7 +205,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     local activated = _G[AddonName.."DB"].use_profiles
     -------------------------------------------------------------------------------
     local profiles_sectionTitle = container:CreateFontString(READI.ARTWORK, nil, "GameFontHighlightLarge")
-    profiles_sectionTitle:SetPoint(READI.ANCHOR_TOPLEFT, anchorline, 0, -20)
+    profiles_sectionTitle:SetPoint(READI.ANCHOR_TOPLEFT, anchorline, 20, -20)
     profiles_sectionTitle:SetText(READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Character Profiles"]))
     -------------------------------------------------------------------------------
     local activationDescription = container:CreateFontString(READI.ARTWORK, nil, "GameFontNormal")
@@ -210,7 +215,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     activationDescription:SetJustifyV(READI.ANCHOR_TOP)
     activationDescription:SetWidth(r2r.windowWidth - 20)
     activationDescription:SetWordWrap(true)
-    local cbName = format("%s_%s_activate", AddonName, READI.Helper.string:Capitalize(data.keyword))
+    local cbName = format("%s%s_%s_activate", data.prefix, namingPrefix, READI.Helper.string:Capitalize(data.keyword))
     local opts = {
       name = cbName,
       region = container,
@@ -283,7 +288,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
       storage = "R2R.db",
       option = "assigned_profile",
       condition = R2R.db ~= _G[AddonName.."DB"].global,
-      name = AddonName.."Dropdown_activeProfile",
+      name = format("%s%s_Dropdown_activeProfile", data.prefix, namingPrefix),
       region = wrapper,
       parent = Profiler.activeProfile.label,
       offsetX = -20,
@@ -307,7 +312,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.copyProfile.dropdown = READI:DropDown(data, {
       values = Profiler.copyProfile.list,
       option = nil,
-      name = AddonName.."Dropdown_copyProfile",
+      name = format("%s%s_Dropdown_copyProfile",data.prefix, namingPrefix),
       region = wrapper,
       parent = Profiler.copyProfile.label,
       offsetX = -20,
@@ -323,7 +328,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.copyProfile.description:SetWordWrap(true)
     -------------------------------------------------------------------------------
     Profiler.copyProfile.button = READI:Button(data, {
-      name = AddonName.."CopyProfileButton",
+      name = format("%s%s_CopyProfileButton",data.prefix, namingPrefix),
       label = R2R.L["Submit"],
       region = wrapper,
       parent = Profiler.copyProfile.description,
@@ -347,7 +352,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.deleteProfile.dropdown = READI:DropDown(data, {
       values = Profiler.deleteProfile.list,
       option = nil,
-      name = AddonName.."Dropdown_deleteProfile",
+      name = format("%s%s_Dropdown_deleteProfile",data.prefix, namingPrefix),
       region = wrapper,
       parent = Profiler.deleteProfile.label,
       p_anchor = READI.ANCHOR_BOTTOMLEFT,
@@ -364,7 +369,7 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.deleteProfile.description:SetWordWrap(true)
     -------------------------------------------------------------------------------
     Profiler.deleteProfile.button = READI:Button(data, {
-      name = AddonName.."DeleteProfileButton",
+      name = format("%s%s_DeleteProfileButton",data.prefix, namingPrefix),
       label = R2R.L["Submit"],
       region = wrapper,
       parent = Profiler.deleteProfile.description,

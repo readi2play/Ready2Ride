@@ -8,6 +8,7 @@ L["Reset"] = "Reset"
 L["Clear all"] = "Clear all"
 L["Unselect all"] = "Unselect all"
 L["Select all"] = "Select all"
+L["Select"] = "Select"
 L["Close"] = "Close"
 L["Cancel"] = "Cancel"
 L["Okay"] = "Okay"
@@ -67,8 +68,15 @@ Yours sincerely
 %2$s
 ]=]
 L["powered by:"] = "powered by:"
---[[ Frame Settings ]]--
+L["Configuration"] = "Configuration"
+
+--[[ Settings Panel Titles ]]--
+L["Mounts"] = "Mount Settings"
+L["Specials"] = "Special Bindings"
 L["Anchoring"] = "Frame Settings"
+L["Profiles"] = "Profiles"
+
+--[[ Frame Settings ]]--
 L["Frame Settings"] = "Frame Settings"
 L["Button Anchor"] = "Button Anchor"
 L["Select the anchor point of the %s that should be aligned to its parent frame."] = "Select the anchor point of the %s that should be aligned to its parent frame."
@@ -83,13 +91,10 @@ L["Button Size"] = "Button Size"
 L["What size should the %s have?"] = "What size should the %s have?"
 
 --[[ Mount Settings ]]--
-L["Use zone specific mount"] = "Use zone specific mount"
-L["Mount"] = "Mount"
-L["Select the mount to be used for this continent"] = "Select the mount to be used for this continent"
-L["Select the mount to be used for this specific zone"] = "Select the mount to be used for this specific zone"
+L["Use zone specific mounts"] = "Use zone specific mounts"
+L["Select the mount to be used for:"] = "Select the mount to be used for:"
 
 --[[ Special Settings ]]--
-L["Specials"] = "Special Bindings"
 L["Special Bindings"] = "Special Bindings"
 -- L["Select a mount for left ALT-Key"] = "Select a mount for left ALT-Key"
 -- L["Select a mount for left CTRL-Key"] = "Select a mount for left CTRL-Key"
@@ -101,7 +106,6 @@ L["When in No-Mount Area"] = "When in No-Mount Area"
 L["Select a specific ability to be used while in a no-mount area (e.g. being indoors). To do so enter the |cFFFFE680name|r or |cFFFFE680spellID|r of your ability of choice into the Editbox."] = "Select a specific ability to be used while in a no-mount area (e.g. being indoors). To do so enter the |cFFFFE680name|r or |cFFFFE680spellID|r of your ability of choice into the Editbox."
 
 --[[ Profile Settings ]]--
-L["Profiles"] = "Profiles"
 L["Default"] = "Default"
 L["Character Profiles"] = "Character Profiles"
 L["This section allows you to select the currently active storage profile so you can define different settings for different characters which leads to much more flexible configurations."] = "This section allows you to select the currently active storage profile so you can define different settings for different characters which leads to much more flexible configurations."
