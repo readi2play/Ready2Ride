@@ -113,7 +113,7 @@ function R2R:GetFilteredListOfMounts(filter, ...)
     check whether player is using default filter settings
       - all types active
       - all sources active
-      - showing collected, not collected AND unusable mounts
+      - showing collected and not collected but NOT unusable mounts
   ]]--
   local isUsingDefaultFilters = C_MountJournal.IsUsingDefaultFilters()
   
@@ -150,7 +150,6 @@ function R2R:GetFilteredListOfMounts(filter, ...)
   return mounts
 end
 
-
 function R2R:GetMountID()
   if IsSubmerged() then
     local hasAbility = R2R.db.bindings.swimming.ability ~= ""
@@ -162,12 +161,14 @@ function R2R:GetMountID()
   end
 
   R2R.ZoneID = C_Map.GetBestMapForUnit("player")
-  R2R.ContinentID = R2R:GetContinent(R2R.ZoneID).mapID
+  if not R2R.ZoneID then return nil end
+  R2R.ContinentID = R2R:GetContinent(R2R.ZoneID).mapID or R2R.ZoneID
 
   local currentContinent = RD.Helper.table:Filter(R2R.db.continents, function(c) return c.zoneID == R2R.ContinentID end)[1]
-  local currentZone = RD.Helper.table:Filter(currentContinent.zones, function(z) return z.zoneID == R2R.ZoneID end)[1]
-  if currentContinent.hasZones and currentContinent.useZones and currentZone then
-    if currentZone.mountID ~= "" then
+
+  if currentContinent.hasZones and currentContinent.useZones then
+    local currentZone = RD.Helper.table:Filter(currentContinent.zones, function(z) return z.zoneID == R2R.ZoneID end)[1]
+    if currentZone and currentZone.mountID ~= "" then
       return currentZone.mountID
     else
       return currentContinent.mountID
@@ -175,36 +176,6 @@ function R2R:GetMountID()
   end
   return currentContinent.mountID
 end
-
-
--- function R2R:GetMountID()
---   -- if #R2R.ActiveKeys > 0 then
---   --   local key = table.concat(READI.Helper.table:Filter(R2R.ActiveKeys, function(v) return v ~= nil end), "+")
---   --   if R2R.db.bindings.keys[key] then
---   --     return R2R.db.bindings.keys[key]
---   --   end
---   -- end
-
---   if IsSubmerged() then
---     local hasAbility = R2R.db.bindings.swimming.ability ~= ""
---     if hasAbility then
---       return R2R.db.bindings.swimming.ability
---     else
---       return R2R.db.bindings.swimming.mount
---     end
---   end
-
---   R2R.Zone = C_Map.GetBestMapForUnit("player")
---   local zoneID = tostring(R2R.Zone)
---   R2R.ContinentID = tostring(R2R:GetContinent(R2R.Zone).mapID)
-
-  
---   if R2R.db.continents[R2R.ContinentID].hasZones and R2R.db.continents[R2R.ContinentID].useZones and R2R.db.continents[R2R.ContinentID].zones[zoneID] then
---     return R2R.db.continents[R2R.ContinentID].zones[zoneID].mountID or R2R.db.continents[R2R.ContinentID].mountID
---   end
-
---   return R2R.db.continents[R2R.ContinentID].mountID
--- end
 
 function R2R:GetMount(id)
   if not id then return nil, nil, nil end

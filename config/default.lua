@@ -164,7 +164,7 @@ R2R.defaults = {
         },
         -- Uldum
         {
-          zoneID = 249,
+          zoneID = 1527,
           mountID = ""
         },
         -- Un'Goro Crater
@@ -177,6 +177,21 @@ R2R.defaults = {
           zoneID = 83,
           mountID = ""
         },
+        -- Ahn'Qiraj, the fallen kingdom (Outside)
+        {
+          zoneID = 327,
+          mountID = ""
+        },
+        -- Ruins of Ahn'Oraj
+        {
+          zoneID = 247,
+          mountID = ""
+        },
+        -- Temple of Ahn'Qiraj
+        {
+          zoneID = 320,
+          mountID = ""
+        },
       }
     },
     { -- Eastern Kingdoms
@@ -185,11 +200,6 @@ R2R.defaults = {
       useZones = false,
       mountID = 1792,
       zones = {
-        -- Abyssal Depths
-        {
-          zoneID = 204,
-          mountID = ""
-        },
         -- Arathi Highlands
         {
           zoneID = 14,
@@ -275,11 +285,6 @@ R2R.defaults = {
           zoneID = 122,
           mountID = ""
         },
-        -- Kelp'thar Forest
-        {
-          zoneID = 201,
-          mountID = ""
-        },
         -- Loch Modan
         {
           zoneID = 48,
@@ -303,11 +308,6 @@ R2R.defaults = {
         -- Searing Gorge
         {
           zoneID = 32,
-          mountID = ""
-        },
-        -- Shimmering Expanse
-        {
-          zoneID = 205,
           mountID = ""
         },
         -- Silvermoon City
@@ -547,16 +547,6 @@ R2R.defaults = {
           zoneID = 379,
           mountID = ""
         },
-        -- Shrine of the Seven Stars
-        {
-          zoneID = 390,
-          mountID = ""
-        },
-        -- Shrine of Two Moons
-        {
-          zoneID = 392,
-          mountID = ""
-        },
         -- The Jade Forest
         {
           zoneID = 371,
@@ -577,14 +567,24 @@ R2R.defaults = {
           zoneID = 388,
           mountID = ""
         },
+        -- Valley of the Four Winds
+        {
+          zoneID = 376,
+          mountID = ""
+        },
         -- Vale of Eternal Blossoms
         {
           zoneID = 390,
           mountID = ""
         },
-        -- Valley of the Four Winds
+        -- Shrine of Two Moons
         {
-          zoneID = 376,
+          zoneID = 392,
+          mountID = ""
+        },
+        -- Shrine of the Seven Stars
+        {
+          zoneID = 393,
           mountID = ""
         },
       }
@@ -812,16 +812,14 @@ R2R.defaults = {
           zoneID = 895,
           mountID = ""
         },
+        { -- Mechagon
+          zoneID = 1462,
+          mountID = "",
+        },
       }
     },
     { -- Nazjatar
       zoneID = 1355,
-      hasZones = false,
-      useZones = false,
-      mountID = 1792,
-    },
-    { -- Mechagon
-      zoneID = 1462,
       hasZones = false,
       useZones = false,
       mountID = 1792,
@@ -877,6 +875,16 @@ R2R.defaults = {
           zoneID = 1970,
           mountID = ""
         },
+        -- Tazavesh (Dungeon)
+        {
+          zoneID = 1989,
+          mountID = ""
+        },
+        -- Tazavesh (Outside)
+        {
+          zoneID = 2016,
+          mountID = ""
+        },
       }
     },
     { -- Dragon Isles
@@ -925,6 +933,54 @@ R2R.defaults = {
           zoneID = 2200,
           mountID = 1589
         },
+        -- Bel'ameth
+        {
+          zoneID = 2239,
+          mountID = "",
+        },
+        -- Primalist Tomorrow
+        {
+          zoneID = 2085,
+          mountID = "",
+        },
+        -- Ruby Life Pools
+        {
+          zoneID = 2094,
+          mountID = "",
+        },
+        -- Neltharus
+        {
+          zoneID = 2080,
+          mountID = "",
+        },
+        -- The Nokhud Offensive
+        {
+          zoneID = 2093,
+          mountID = "",
+        },
+        -- Brackenhide Hollow
+        {
+          zoneID = 2096,
+          mountID = "",
+        },
+        -- Algeth'ar Academy
+        {
+          zoneID = 2097,
+          mountID = "",
+        },
+        -- Amirdrassil, the dreams Hoppe
+        {
+          zoneID = 2235,
+          mountID = "",
+        },
+        {
+          zoneID = 2236,
+          mountID = "",
+        },
+        {
+          zoneID = 2237,
+          mountID = "",
+        },
       }
     },
     { -- Khaz Algar
@@ -972,6 +1028,46 @@ R2R.defaults = {
         {
           zoneID = 2216,
           mountID = 2181
+        },
+        -- The Dawnbreaker
+        {
+          zoneID = 2359,
+          mountID = ""
+        },
+        -- Priory of the Holy Flame
+        {
+          zoneID = 2308,
+          mountID = ""
+        },
+        -- City of Threads
+        {
+          zoneID = 2343,
+          mountID = ""
+        },
+        -- Ara-Kara, City of Echos
+        {
+          zoneID = 2357,
+          mountID = ""
+        },
+        -- The Breeding Ground
+        {
+          zoneID = 2315,
+          mountID = ""
+        },
+        -- Emberbrew Meadbrewery
+        {
+          zoneID = 2335,
+          mountID = ""
+        },
+        -- The Stone Vault
+        {
+          zoneID = 2341,
+          mountID = ""
+        },
+        -- Darkflame Rift
+        {
+          zoneID = 2303,
+          mountID = ""
         },
       }
     }

@@ -122,11 +122,6 @@ R2R.Profile = R2R.Profile or {
       local prompt = _G[promptName] or READI:Dialog(data, {
         name = promptName,
         title = READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Delete Profile"]),
-        -- icon = {
-        --   texture = GetAddOnMetadata(AddonName, "IconTexture"),
-        --   height = 42,
-        --   width = 42,
-        -- },
         buttonSet = {
           {
             key = "cancel",
@@ -167,7 +162,6 @@ R2R.Profile = R2R.Profile or {
               table.remove(Profiler.deleteProfile.dropdown.MenuList, __delIdx)
         
               _G[AddonName.."DB"].chars[__selection] = nil
-              R2R:UpdateOptions()
             end
           }
         },

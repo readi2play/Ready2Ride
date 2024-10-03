@@ -94,6 +94,13 @@ L["What size should the %s have?"] = "What size should the %s have?"
 L["Use zone specific mounts"] = "Use zone specific mounts"
 L["Select the mount to be used for:"] = "Select the mount to be used for:"
 
+--[[ Mount Selector ]]--
+L["Mount Selector"] = "Mount Selector"
+L["Grounded"] = "Grounded"
+L["Flying"] = "Flying"
+L["Aquatic"] = "Aquatic"
+L["Skyriding"] = "Skyriding"
+
 --[[ Special Settings ]]--
 L["Special Bindings"] = "Special Bindings"
 -- L["Select a mount for left ALT-Key"] = "Select a mount for left ALT-Key"

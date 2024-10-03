@@ -7,7 +7,7 @@ local data = CopyTable(R2R.data)
 data.keyword = "config"
 
 R2R.config = {}
-R2R.settings = {}
+-- R2R.settings = {}
 
 r2r.windowWidth = SettingsPanel.Container:GetWidth()
 r2r.columns = 2
@@ -128,7 +128,7 @@ function R2R:SetupConfig()
 
     if panelExists then
       R2R.config[key] = R2R.config[key] or {}
-      R2R.settings[key] = R2R.settings[key] or {}
+      -- R2R.settings[key] = R2R.settings[key] or {}
       local panelName = R2R.L[READI.Helper.string:Capitalize(key)]
       local parentPanel = nil
       local c_titleText = R2R.L[READI.Helper.string:Capitalize(key)]
@@ -208,28 +208,28 @@ function R2R:SetupConfig()
         },
       })
 
-      R2R.settings[key].panel, R2R.settings[key].container, R2R.settings[key].anchorline = READI:OptionPanel(data, {
-        name = panelName,
-        parent = parentPanel,
-        title = {
-          text = s_titleText,
-          color = "r2r",
-        },
-      })
+      -- R2R.settings[key].panel, R2R.settings[key].container, R2R.settings[key].anchorline = READI:OptionPanel(data, {
+      --   name = panelName,
+      --   parent = parentPanel,
+      --   title = {
+      --     text = s_titleText,
+      --     color = "r2r",
+      --   },
+      -- })
 
       --[[------------------------------------------------------------------------]]--
-      if Settings and Settings.RegisterCanvasLayoutCategory then
-        if parentPanel then
-          local category = Settings.GetCategory(parentPanel)
-          local subcategory = Settings.RegisterCanvasLayoutSubcategory(category, R2R.settings[key].panel, panelName)
-        else
-          local category = Settings.RegisterCanvasLayoutCategory(R2R.settings[key].panel, AddonName)
-          category.ID = AddonName
-          Settings.RegisterAddOnCategory(category)
-        end
-      else
-        InterfaceOptions_AddCategory(R2R.settings[key].panel)
-      end
+      -- if Settings and Settings.RegisterCanvasLayoutCategory then
+      --   if parentPanel then
+      --     local category = Settings.GetCategory(parentPanel)
+      --     local subcategory = Settings.RegisterCanvasLayoutSubcategory(category, R2R.settings[key].panel, panelName)
+      --   else
+      --     local category = Settings.RegisterCanvasLayoutCategory(R2R.settings[key].panel, AddonName)
+      --     category.ID = AddonName
+      --     Settings.RegisterAddOnCategory(category)
+      --   end
+      -- else
+      --   InterfaceOptions_AddCategory(R2R.settings[key].panel)
+      -- end
     end
   end
 end
@@ -241,15 +241,12 @@ function R2R:InitializeOptions()
     local FillPanelFunctionName = format("Fill%sPanel", READI.Helper.string:Capitalize(key))
     local panelExists = READI.Helper.functions:Exists("R2R."..FillPanelFunctionName)
     if panelExists then
-      R2R[FillPanelFunctionName](self, R2R.settings[key].panel, R2R.settings[key].container, R2R.settings[key].anchorline)
+      -- R2R[FillPanelFunctionName](self, R2R.settings[key].panel, R2R.settings[key].container, R2R.settings[key].anchorline)
       R2R[FillPanelFunctionName](self, R2R.ConfigDialog, R2R.config[key].container, R2R.config[key].anchorline)
     end
   end
 end
-function R2R:UpdateOptions(shuffle)
-  if shuffle == nil then
-    shuffle = true
-  end
+function R2R:UpdateOptions()
   R2R.Anchoring:Update()
 
   R2R.SkyButton:ScaleButton()
