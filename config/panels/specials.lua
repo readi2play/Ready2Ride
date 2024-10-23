@@ -66,6 +66,8 @@ function R2R:FillSpecialsPanel(panel, container, anchorline)
   swimming_sectionSubTitle:SetJustifyH("LEFT")
   swimming_sectionSubTitle:SetJustifyV(READI.ANCHOR_TOP)
   swimming_sectionSubTitle:SetWordWrap(true)
+  swimming_sectionSubTitle:SetSpacing(3)
+  swimming_sectionSubTitle:SetTextScale(1.2)
   swimming_sectionSubTitle:SetWidth(r2r.columnWidth)
   swimming_sectionSubTitle:SetText(READI.Helper.color:Get("white", nil, R2R.Specials.swimming.description))
 
@@ -80,6 +82,8 @@ function R2R:FillSpecialsPanel(panel, container, anchorline)
   noMountArea_sectionSubTitle:SetJustifyH("LEFT")
   noMountArea_sectionSubTitle:SetJustifyV(READI.ANCHOR_TOP)
   noMountArea_sectionSubTitle:SetWordWrap(true)
+  noMountArea_sectionSubTitle:SetSpacing(3)
+  noMountArea_sectionSubTitle:SetTextScale(1.2)
   noMountArea_sectionSubTitle:SetWidth(r2r.columnWidth)
   noMountArea_sectionSubTitle:SetText(READI.Helper.color:Get("white", nil, R2R.Specials.noMountArea.description))
 
@@ -87,7 +91,7 @@ function R2R:FillSpecialsPanel(panel, container, anchorline)
   create fields
   ----------------------------------------------------------------------------]]--
   R2R.Specials.swimming.dropdown = READI:DropDown(data, {
-    values = R2R:GetFilteredListOfMounts(READI.MOUNT_TYPE_AQUATIC),
+    values = R2R.mountLists[3].mounts,
     storage = "R2R.db.bindings.swimming",
     option = "mount",
     name = format("%s%sDropdown_swimming", namingPrefix, AddonName),

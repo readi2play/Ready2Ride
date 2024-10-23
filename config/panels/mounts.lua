@@ -14,27 +14,20 @@ R2R.Mounts = R2R.Mounts or {
 OPTIONS PANEL CREATION
 ----------------------------------------------------------------------------]]--
 function R2R:FillMountsPanel(panel, container, anchorline)
-  local namingPrefix = "SettingsPanel"
-
-  if panel == R2R.ConfigDialog then
-    r2r.windowWidth = ceil(container:GetWidth() - 20)
-    namingPrefix = "ConfigPanel"
-  else
-    r2r.windowWidth = SettingsPanel.Container:GetWidth()
-  end
+  r2r.windowWidth = ceil(container:GetWidth() - 20)
   r2r.columnWidth = r2r.windowWidth / r2r.columns - 20
 
   --[[--------------------------------------------------------------------------
   CREATE SCROLLABLE FRAME
   --------------------------------------------------------------------------]]--
 
-  local scrollFrameName = format("%s_%sScrollFrame", data.prefix, namingPrefix)
+  local scrollFrameName = format("%s_%sScrollFrame", data.prefix, data.keyword)
   R2R.Mounts.ScrollFrame = R2R.Mounts.ScrollFrame or CreateFrame("ScrollFrame", scrollFrameName, container, "UIPanelScrollFrameTemplate")
   R2R.Mounts.ScrollFrame:ClearAllPoints()
   R2R.Mounts.ScrollFrame:SetPoint(RD.ANCHOR_TOPLEFT, anchorline, RD.ANCHOR_TOPLEFT, 10, -10)
   R2R.Mounts.ScrollFrame:SetPoint(RD.ANCHOR_BOTTOMRIGHT, container, RD.ANCHOR_BOTTOMRIGHT, -30, 10)
-
-  local scrollChildName = format("%s_%sScrollChild", data.prefix, namingPrefix)
+  
+  local scrollChildName = format("%s_%sScrollChild", data.prefix, data.keyword)
   if not R2R.Mounts.ScrollChild then
     R2R.Mounts.ScrollChild = CreateFrame("Frame", scrollChildName, R2R.Mounts.ScrollFrame)
     R2R.Mounts.ScrollChild:SetSize(R2R.Mounts.ScrollFrame:GetWidth(), R2R.Mounts.ScrollFrame:GetHeight())
@@ -50,7 +43,7 @@ function R2R:FillMountsPanel(panel, container, anchorline)
     local gap = 10
     local mapID = map.zoneID
     local mapName = C_Map.GetMapInfo(map.zoneID).name
-    local frameName = format("%s_%sMapSection_ID%d", data.prefix, namingPrefix, mapID)
+    local frameName = format("%s_%sMapSection_ID%d", data.prefix, data.keyword, mapID)
     local region = R2R.Mounts.ScrollChild
     local p_anchor = RD.ANCHOR_TOPLEFT
     local offsetY = 0
@@ -64,7 +57,7 @@ function R2R:FillMountsPanel(panel, container, anchorline)
 
     schrollChildHeight = schrollChildHeight + offsetY
 
-    -- remember "SettingsExpandableSectionTemplate" maybe this could be helpful somewhen
+    -- remember "SettingsExpandableSectionTemplate" maybe this could be helpful somewhen for now we gonna use "BackdropTemplate"
     R2R.Mounts.sections[i] = R2R.Mounts.sections[i] or CreateFrame("Frame", frameName, R2R.Mounts.ScrollChild, "BackdropTemplate")
     R2R.Mounts.sections[i]:ClearAllPoints()
     R2R.Mounts.sections[i]:SetClipsChildren(true)
@@ -92,12 +85,16 @@ function R2R:FillMountsPanel(panel, container, anchorline)
     sectionHeight = sectionHeight + R2R.Mounts.sections[i].Title:GetLineHeight() + gap * 2
     local cbName = nil
     if map.hasZones and map.zones then
-      cbName = format("%s_%sUseZones_%d", data.prefix, namingPrefix, mapID)
+      cbName = format("%s_%sUseZones_%d", data.prefix, data.keyword, mapID)
       R2R.Mounts.fields[cbName] = READI:CheckBox(data, {
         name = cbName,
         region = R2R.Mounts.sections[i],
         enabled = true,
-        label = R2R.L["Use zone specific mounts"],
+        label = {
+          string = R2R.L["Use zone specific mounts"],
+          spacing = 0,
+          scale = 1.3,
+        },
         parent = R2R.Mounts.sections[i].Title,
         p_anchor = "BOTTOMLEFT",
         offsetY = -10,
@@ -131,7 +128,7 @@ function R2R:FillMountsPanel(panel, container, anchorline)
     )
     sectionHeight = sectionHeight + continentMountTitle:GetLineHeight() + gap * 2
 
-    local c_ebName = format("%s_%sZoneMount_%d", data.prefix, namingPrefix, mapID)
+    local c_ebName = format("%s_%sZoneMount_%d", data.prefix, data.keyword, mapID)
     local c_ebVal = ""
     if R2R.db.continents[i].mountID ~= "" then
       c_ebVal = C_MountJournal.GetMountInfoByID(R2R.db.continents[i].mountID)
@@ -186,7 +183,7 @@ function R2R:FillMountsPanel(panel, container, anchorline)
       R2R.Mounts.sections[i].subs = R2R.Mounts.sections[i].subs or {}
 
       for k, zone in ipairs(map.zones) do
-        local wrapperName = format("%s_%sZoneWrapper_%d_%d", data.prefix, namingPrefix, mapID, zone.zoneID)
+        local wrapperName = format("%s_%sZoneWrapper_%d_%d", data.prefix, data.keyword, mapID, zone.zoneID)
         local wrapperHeight = 0
 
         R2R.Mounts.sections[i].subs[k] = R2R.Mounts.sections[i].subs[k] or CreateFrame("Frame", wrapperName, R2R.Mounts.sections[i])
@@ -221,7 +218,7 @@ function R2R:FillMountsPanel(panel, container, anchorline)
         )
         wrapperHeight = wrapperHeight + (R2R.Mounts.sections[i].subs[k].Title:GetLineHeight() * R2R.Mounts.sections[i].subs[k].Title:GetNumLines()) + gap
 
-        local z_ebName = format("%s_%sZoneMount_%d_%d", data.prefix, namingPrefix, mapID, zone.zoneID)
+        local z_ebName = format("%s_%sZoneMount_%d_%d", data.prefix, data.keyword, mapID, zone.zoneID)
         local z_ebVal = ""
         if R2R.db.continents[i].zones[k].mountID ~= "" then
           z_ebVal = C_MountJournal.GetMountInfoByID(R2R.db.continents[i].zones[k].mountID)
@@ -285,4 +282,5 @@ function R2R:FillMountsPanel(panel, container, anchorline)
   end
 
   R2R.Mounts.ScrollChild:SetHeight(schrollChildHeight)
+  R2R.MountSelector:Init()
 end

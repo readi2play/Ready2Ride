@@ -53,16 +53,16 @@ function CreateConfigDialog()
       offsetX = 4,
       offsetY = 4
     },
-    buttonSet = {
-      {
-        key = "close",
-        label = R2R.L["Close"],
-        offsetX = -20,
-        offsetY = 30,
-        parent = {
-          anchor = READI.ANCHOR_BOTTOMRIGHT,
-        }
-      },
+    -- buttonSet = {
+      -- {
+      --   key = "close",
+      --   label = R2R.L["Close"],
+      --   offsetX = -20,
+      --   offsetY = 30,
+      --   parent = {
+      --     anchor = READI.ANCHOR_BOTTOMRIGHT,
+      --   }
+      -- },
       -- {
       --   key = "cancel",
       --   label = R2R.L["Cancel"],
@@ -79,7 +79,7 @@ function CreateConfigDialog()
       --     anchor = READI.ANCHOR_BOTTOMLEFT,
       --   },
       -- }
-    }
+    -- }
   }
 
   local dialog = READI:Dialog(data, settings)
@@ -134,6 +134,9 @@ function R2R:SetupConfig()
       local c_titleText = R2R.L[READI.Helper.string:Capitalize(key)]
       local s_titleText = R2R.L[READI.Helper.string:Capitalize(key)]
       local l_offsetX, l_offsetY, r_offsetX, r_offsetYich, panelHidden, c_width
+      local panelClipping = false
+      r_offsetY = 28
+      r_offsetX = -10
 
       if key == "info" then
         panelName = AddonName
@@ -141,13 +144,12 @@ function R2R:SetupConfig()
         s_titleText = AddonName
         l_offsetX = 10
         l_offsetY = -72
-        c_width = infoWidth        
+        c_width = infoWidth
+        panelClipping = true
       else
         parentPanel = AddonName
         l_offsetX = infoWidth + 20
         l_offsetY = -100
-        r_offsetX = -10
-        r_offsetY = 72
         c_width = nil
         panelHidden = true
       end
@@ -192,6 +194,7 @@ function R2R:SetupConfig()
         parent = R2R.ConfigDialog,
         width = c_width,
         hidden = panelHidden,
+        clipChildren = panelClipping,
         background = "0.03,0.02,0,0.5",
         border = "0.7,0.68,0.69,0.5",
         left = {

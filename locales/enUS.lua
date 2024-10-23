@@ -15,6 +15,8 @@ L["Okay"] = "Okay"
 L["Submit"] = "Submit"
 L["Yes"] = "Yes"
 L["No"] = "No"
+L["Page"] = "Page"
+L["of"] = "of"
 
 --[[ Info ]]--
 L["Info"] = "Info"
@@ -31,7 +33,8 @@ L[ [=[
     - when swimming (if configured)
 - Configure a movement ability to be used in no-mount areas (e.g. indoors)
 - Place the %1$s wherever you want on your screen
-- The %1$s is accessible via Macros using %3$s
+- The %1$s is accessible via Macros using
+    %3$s
 ]=] ] = [=[
 - Right click the %1$s to easily %2$s
 - Hold SHIFT while left clicking the %1$s to display your current zone and continent (incl. their MapIDs)
@@ -41,7 +44,8 @@ L[ [=[
     - when swimming (if configured)
 - Configure a movement ability to be used in no-mount areas (e.g. indoors)
 - Place the %1$s wherever you want on your screen
-- The %1$s is accessible via Macros using %3$s
+- The %1$s is accessible via Macros using
+    %3$s
 ]=]
 L["Slash Command"] = "Slash Command"
 L[ [=[
@@ -100,6 +104,7 @@ L["Grounded"] = "Grounded"
 L["Flying"] = "Flying"
 L["Aquatic"] = "Aquatic"
 L["Skyriding"] = "Skyriding"
+L["Unselect Mount"] = "Unselect Mount"
 
 --[[ Special Settings ]]--
 L["Special Bindings"] = "Special Bindings"

@@ -1,8 +1,8 @@
-## Interface: 110002
+## Interface: 110005
 ## Title: Ready2Ride by |cFF78B064readi2play|r 
 ## Notes: Configure a different mount for each zone or for whole continents and allow easy toggle between static and dynamic flying style.
 ## IconTexture: Interface\AddOns\Ready2Ride\media\r2r_logo.tga
-## Version: 0.8.9
+## Version: 0.9.2
 ## Author: |cFF78B064readi2play|r
 ## SavedVariables: Ready2RideDB
 ## SavedVariablesPerCharacter: Ready2RideDBChr

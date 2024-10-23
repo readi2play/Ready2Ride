@@ -24,10 +24,11 @@ TEXTURES
 ----------------------------------------------------------------------------]]--
 Ready2RideLogo = "Interface\\AddOns\\Ready2Ride\\Media\\r2r_logo"
 --[[------------------------------------------------------------------------]]--
-MountSelectorTileBackground = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_TileBackground"
-MountSelectorTileBorder = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_TileBorder"
 MountSelectorIconMask = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_TileIconMaskrder"
-MountSelectorSelectionIndicator = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_SelectionIndicator"
+MountSelectorSelectorNormal = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_SelectorNormal"
+MountSelectorSelectorHighlight = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_SelectorHighlight"
+MountSelectorSelectorActive = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_SelectorActive"
+
 MountSelectorFilterGrounded = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_FilterGrounded"
 MountSelectorFilterFlying = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_FilterFlying"
 MountSelectorFilterAquatic = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelector_FilterAquatic"
@@ -36,8 +37,8 @@ MountSelectorFilterDynamic = "Interface\\AddOns\\Ready2Ride\\Media\\MountSelecto
 
 R2R.Locale = GAME_LOCALE or GetLocale()
 R2R.L = {}
+R2R.mountLists = {}
 
-R2R.mounts = {}
 --[[----------------------------------------------------------------------------
 -- EVENT HANDLERS
 ----------------------------------------------------------------------------]]--
@@ -62,13 +63,11 @@ function R2R:ADDON_LOADED(evt, addon)
 end
 
 function R2R:PLAYER_ENTERING_WORLD(evt, isLogin, isReload)
-  R2R:InitializeOptions()
-
   R2R.faction, _ = string.lower(UnitFactionGroup("player"))  
   R2R.registered = C_ChatInfo.RegisterAddonMessagePrefix(R2R.data.prefix)
+
   if not R2R.SkyButton then return end
   R2R.SkyButton:Update()
-
 end
 
 function R2R:PLAYER_LEAVING_WORLD(evt, isLogout, isReload)
@@ -79,7 +78,21 @@ function R2R:PLAYER_LEAVING_WORLD(evt, isLogout, isReload)
 end
 
 function R2R:FIRST_FRAME_RENDERED(evt)
-  -- implement functionality
+  local mountTypeTitles = {
+    R2R.L["Grounded"],
+    R2R.L["Flying"],
+    R2R.L["Aquatic"],
+    R2R.L["Skyriding"],
+  }
+  for i=1, #RD.MOUNT_TYPES do
+    R2R.mountLists[i] = {
+      title = mountTypeTitles[i],
+      mounts = R2R:GetFilteredListOfMounts(RD.MOUNT_TYPES[i]),
+    }
+    table.insert(R2R.mountLists[i].mounts, 1, {txt = R2R.L["Unselect Mount"], val = ""})
+  end
+
+  R2R:InitializeOptions()
   R2R:InitializeButton()
 end
 
@@ -102,6 +115,7 @@ function R2R:GetContinent(zoneID)
 end
 
 function R2R:GetFilteredListOfMounts(filter, ...)
+  -- print(filter)
   local filters = { filter }
   local __addFlts = select("#", ...)
   if __addFlts > 0 then

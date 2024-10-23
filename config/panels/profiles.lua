@@ -209,11 +209,17 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     activationDescription:SetJustifyV(READI.ANCHOR_TOP)
     activationDescription:SetWidth(r2r.windowWidth - 20)
     activationDescription:SetWordWrap(true)
+    activationDescription:SetSpacing(3)
+    activationDescription:SetTextScale(1.2)
     local cbName = format("%s%s_%s_activate", data.prefix, namingPrefix, READI.Helper.string:Capitalize(data.keyword))
     local opts = {
       name = cbName,
       region = container,
-      label = R2R.L["Activate character specific profiles"],
+      label = {
+        string = R2R.L["Activate character specific profiles"],
+        spacing = 0,
+        scale = 1.3,
+      },
       parent = activationDescription,
       p_anchor = READI.ANCHOR_BOTTOMLEFT,
       offsetX = 0,
@@ -276,6 +282,8 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.activeProfile.label:SetJustifyV(READI.ANCHOR_TOP)
     Profiler.activeProfile.label:SetWidth(r2r.columnWidth)
     Profiler.activeProfile.label:SetWordWrap(true)
+    Profiler.activeProfile.label:SetSpacing(3)
+    Profiler.activeProfile.label:SetTextScale(1.2)
     -------------------------------------------------------------------------------
     Profiler.activeProfile.dropdown = READI:DropDown(data, {
       values = Profiler.activeProfile.list,
@@ -302,6 +310,8 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.copyProfile.label:SetJustifyV(READI.ANCHOR_TOP)
     Profiler.copyProfile.label:SetWidth(r2r.columnWidth - 20)
     Profiler.copyProfile.label:SetWordWrap(true)
+    Profiler.copyProfile.label:SetSpacing(3)
+    Profiler.copyProfile.label:SetTextScale(1.2)
     -------------------------------------------------------------------------------
     Profiler.copyProfile.dropdown = READI:DropDown(data, {
       values = Profiler.copyProfile.list,
@@ -320,6 +330,8 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.copyProfile.description:SetJustifyV(READI.ANCHOR_TOP)
     Profiler.copyProfile.description:SetWidth(r2r.columnWidth - 20)
     Profiler.copyProfile.description:SetWordWrap(true)
+    Profiler.copyProfile.description:SetSpacing(3)
+    Profiler.copyProfile.description:SetTextScale(1.2)
     -------------------------------------------------------------------------------
     Profiler.copyProfile.button = READI:Button(data, {
       name = format("%s%s_CopyProfileButton",data.prefix, namingPrefix),
@@ -342,6 +354,8 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.deleteProfile.label:SetJustifyV(READI.ANCHOR_TOP)
     Profiler.deleteProfile.label:SetWidth(r2r.columnWidth - 20)
     Profiler.deleteProfile.label:SetWordWrap(true)
+    Profiler.deleteProfile.label:SetSpacing(3)
+    Profiler.deleteProfile.label:SetTextScale(1.2)
     -------------------------------------------------------------------------------
     Profiler.deleteProfile.dropdown = READI:DropDown(data, {
       values = Profiler.deleteProfile.list,
@@ -361,6 +375,8 @@ function R2R:FillProfilesPanel(panel, container, anchorline)
     Profiler.deleteProfile.description:SetJustifyV(READI.ANCHOR_TOP)
     Profiler.deleteProfile.description:SetWidth(r2r.columnWidth - 20)
     Profiler.deleteProfile.description:SetWordWrap(true)
+    Profiler.deleteProfile.description:SetSpacing(3)
+    Profiler.deleteProfile.description:SetTextScale(1.2)
     -------------------------------------------------------------------------------
     Profiler.deleteProfile.button = READI:Button(data, {
       name = format("%s%s_DeleteProfileButton",data.prefix, namingPrefix),

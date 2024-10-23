@@ -4,34 +4,43 @@ BASICS
 local AddonName, r2r = ...
 local data = CopyTable(R2R.data)
 data.keyword = "info"
+R2R.Info = R2R.Info or {}
 --------------------------------------------------------------------------------
 -- OPTIONS PANEL CREATION
 --------------------------------------------------------------------------------
 function R2R:FillInfoPanel(panel, container, anchorline)
-  local padding = 0
-  if panel == R2R.ConfigDialog then
-    r2r.windowWidth = ceil(container:GetWidth() - 20)
-    padding = 10
-  else
-    r2r.windowWidth = SettingsPanel.Container:GetWidth()
-    padding = 18
-  end
+  local padding = 10
+  r2r.windowWidth = ceil(container:GetWidth() - 20)
   r2r.columnWidth = r2r.windowWidth / r2r.columns - 20
+
+
+  local scrollFrameName = format("%s_%sScrollFrame", data.prefix, data.keyword)
+  R2R.Info.ScrollFrame = R2R.Info.ScrollFrame or CreateFrame("ScrollFrame", scrollFrameName, container, "UIPanelScrollFrameTemplate")
+  R2R.Info.ScrollFrame:ClearAllPoints()
+  R2R.Info.ScrollFrame:SetPoint(RD.ANCHOR_TOPLEFT, container, RD.ANCHOR_TOPLEFT, 10, -10)
+  R2R.Info.ScrollFrame:SetPoint(RD.ANCHOR_BOTTOMRIGHT, container, RD.ANCHOR_BOTTOMRIGHT, -30, 10)
+
+  local scrollChildName = format("%s_%sScrollChild", data.prefix, data.keyword)
+  if not R2R.Info.ScrollChild then
+    R2R.Info.ScrollChild = CreateFrame("Frame", scrollChildName, R2R.Info.ScrollFrame)
+    R2R.Info.ScrollChild:SetSize(R2R.Info.ScrollFrame:GetWidth(), R2R.Info.ScrollFrame:GetHeight())
+    R2R.Info.ScrollFrame:SetScrollChild(R2R.Info.ScrollChild)
+  end
 
   local logo = READI:Icon(data, {
     texture = R2R.icon,
     name = format("%s%sLogo", panel:GetName() or "SettingsPanel", AddonName),
-    region = container,
+    region = R2R.Info.ScrollChild,
     width = 80,
     height = 80,
   })
   logo:SetPoint("TOP", 0, -20)
 
-  local headline_infos = container:CreateFontString("ARTWORK", nil, "GameFontHighlightLarge")
+  local headline_infos = R2R.Info.ScrollChild:CreateFontString("ARTWORK", nil, "GameFontHighlightLarge")
   headline_infos:SetPoint("TOP", logo, "BOTTOM", 0, -20)
   headline_infos:SetText(READI.Helper.color:Get("r2r", R2R.Colors, AddonName))
 
-  local infos_text = container:CreateFontString("ARTWORK", nil, "GameFontHighlight")
+  local infos_text = R2R.Info.ScrollChild:CreateFontString("ARTWORK", nil, "GameFontHighlight")
   infos_text:SetPoint("TOP", headline_infos, "BOTTOM", 0, -5)
   infos_text:SetText(
     READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Version: "]) ..
@@ -40,16 +49,18 @@ function R2R:FillInfoPanel(panel, container, anchorline)
     READI.Helper.color:Get("readi", nil, R2R.author.."\n")
   )
 
-  local headline_features = container:CreateFontString("ARTWORK", nil, "GameFontHighlightLarge")
-  headline_features:SetPoint("TOPLEFT", container, 10, -180)
+  local headline_features = R2R.Info.ScrollChild:CreateFontString("ARTWORK", nil, "GameFontHighlightLarge")
+  headline_features:SetPoint("TOPLEFT", R2R.Info.ScrollChild, 10, -180)
   headline_features:SetText(READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Core Features"]))
 
-  local text_features = container:CreateFontString("ARTWORK", nil, "GameFontHighlight")
+  local text_features = R2R.Info.ScrollChild:CreateFontString("ARTWORK", nil, "GameFontHighlight")
   text_features:SetPoint("TOPLEFT", headline_features, "BOTTOMLEFT", 0, -10)
   text_features:SetJustifyH("LEFT")
   text_features:SetJustifyV("TOP")
+  text_features:SetSpacing(3)
+  text_features:SetTextScale(1.2)
   text_features:SetWordWrap(true)
-  text_features:SetWidth(r2r.windowWidth - padding)
+  text_features:SetWidth(R2R.Info.ScrollChild:GetWidth() - padding * 2)
   text_features:SetText(
     READI.Helper.color:Get("white", nil, format(
       R2R.L[ [=[
@@ -61,7 +72,8 @@ function R2R:FillInfoPanel(panel, container, anchorline)
     - when swimming (if configured)
 - Configure a movement ability to be used in no-mount areas (e.g. indoors)
 - Place the %1$s wherever you want on your screen
-- The %1$s is accessible via Macros using %3$s
+- The %1$s is accessible via Macros using
+    %3$s
 ]=] ],
       READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["SkyridingButton"]),
       READI.Helper.color:Get("r2r_light", R2R.Colors, R2R.L["Switch Flight Style"]),
@@ -69,16 +81,18 @@ function R2R:FillInfoPanel(panel, container, anchorline)
     ))
   )
 
-  local headline_commands = container:CreateFontString("ARTWORK", nil, "GameFontHighlightLarge")
+  local headline_commands = R2R.Info.ScrollChild:CreateFontString("ARTWORK", nil, "GameFontHighlightLarge")
   headline_commands:SetPoint("BOTTOMLEFT", text_features, 0, -20)
   headline_commands:SetText(READI.Helper.color:Get("r2r", R2R.Colors, R2R.L["Slash Command"]))
 
-  local text_commands = container:CreateFontString("ARTWORK", nil, "GameFontHighlight")
+  local text_commands = R2R.Info.ScrollChild:CreateFontString("ARTWORK", nil, "GameFontHighlight")
   text_commands:SetPoint("TOPLEFT", headline_commands, "BOTTOMLEFT", 0, -10)
   text_commands:SetJustifyH("LEFT")
   text_commands:SetJustifyV("TOP")
   text_commands:SetWordWrap(true)
-  text_commands:SetWidth(r2r.windowWidth - padding)
+  text_commands:SetSpacing(3)
+  text_commands:SetTextScale(1.2)
+  text_commands:SetWidth(R2R.Info.ScrollChild:GetWidth() - padding * 2)
   text_commands:SetText(
     READI.Helper.color:Get("white", nil, format(
       R2R.L[ [=[

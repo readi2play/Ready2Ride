@@ -44,8 +44,8 @@ function R2R:FillAnchoringPanel(panel, container, anchorline)
         p_anchor = READI.ANCHOR_TOPRIGHT
         x = -96
       else
-        local btnName = format("%s_%sRadioButton_%s_%s", data.prefix, namingPrefix, option, READI.Anchors[i - cols])
-        parent = R2R.Anchoring.fields[btnName]
+        local parentName = format("%s_%sRadioButton_%s_%s", data.prefix, namingPrefix, option, READI.Anchors[i - cols])
+        parent = R2R.Anchoring.fields[parentName]
         p_anchor = READI.ANCHOR_BOTTOMLEFT
       end
       local btnName = format("%s_%sRadioButton_%s_%s", data.prefix, namingPrefix, option ,value)
@@ -64,6 +64,7 @@ function R2R:FillAnchoringPanel(panel, container, anchorline)
         p_anchor = p_anchor,
         offsetX = x,
         offsetY = y,
+        condition = R2R.db.anchoring[option] == value,
         onClick = function()
           local rb = R2R.Anchoring.fields[btnName]
           for i, val in ipairs(READI.Anchors) do
@@ -84,11 +85,6 @@ function R2R:FillAnchoringPanel(panel, container, anchorline)
           if R2R.defaults.anchoring[option] == rb.value and not rb:GetChecked() then rb:Click() end
         end
       })
-
-      if R2R.db.anchoring[option] == value then
-        R2R.Anchoring.fields[btnName]:SetChecked()
-        R2R.Anchoring.fields[btnName].tex:SetTexture(textures.active)
-      end    
     end
   end
 
@@ -108,6 +104,8 @@ function R2R:FillAnchoringPanel(panel, container, anchorline)
     subTitle:SetJustifyH("LEFT")
     subTitle:SetJustifyV(READI.ANCHOR_TOP)
     subTitle:SetWordWrap(true)
+    subTitle:SetSpacing(3)
+    subTitle:SetTextScale(1.2)
     subTitle:SetWidth(r2r.columnWidth)
     if val == "button" then
       subTitle:SetText(
@@ -138,6 +136,8 @@ function R2R:FillAnchoringPanel(panel, container, anchorline)
   local positionX_sectionTitle = container:CreateFontString("ARTWORK", nil, "GameFontHighlight")
   positionX_sectionTitle:SetPoint(READI.ANCHOR_TOPLEFT, position_sectionTitle, READI.ANCHOR_BOTTOMLEFT, 0, -5)
   positionX_sectionTitle:SetText(READI.Helper.color:Get("white", nil, R2R.L["X-Offset"]))
+  positionX_sectionTitle:SetSpacing(3)
+  positionX_sectionTitle:SetTextScale(1.2)
 
   R2R.Anchoring.fields[_posXname] = READI:EditBox(data, {
     name = _posXname,
@@ -162,6 +162,8 @@ function R2R:FillAnchoringPanel(panel, container, anchorline)
   local positionY_sectionTitle = container:CreateFontString("ARTWORK", nil, "GameFontHighlight")
   positionY_sectionTitle:SetPoint(READI.ANCHOR_TOPLEFT, position_sectionTitle, READI.ANCHOR_BOTTOMLEFT, posColWidth + 20, -5)
   positionY_sectionTitle:SetText(READI.Helper.color:Get("white", nil, R2R.L["Y-Offset"]))
+  positionY_sectionTitle:SetSpacing(3)
+  positionY_sectionTitle:SetTextScale(1.2)
 
   R2R.Anchoring.fields[_posYname] = READI:EditBox(data, {
     name = _posYname,
@@ -191,6 +193,8 @@ function R2R:FillAnchoringPanel(panel, container, anchorline)
   local parentFrame_nameTitle = container:CreateFontString("ARTWORK", nil, "GameFontHighlight")
   parentFrame_nameTitle:SetPoint(READI.ANCHOR_TOPLEFT, parentFrame_sectionTitle, READI.ANCHOR_BOTTOMLEFT, 0, -5)
   parentFrame_nameTitle:SetText(READI.Helper.color:Get("white", nil, R2R.L["Enter the name of the parent frame"]))
+  parentFrame_nameTitle:SetSpacing(3)
+  parentFrame_nameTitle:SetTextScale(1.2)
 
   R2R.Anchoring.fields[_parentName] = READI:EditBox(data, {
     name = _parentName,
